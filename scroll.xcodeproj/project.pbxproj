@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */; };
-		F3F6FDB51B360BB700CAACA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDB41B360BB700CAACA6 /* ViewController.swift */; };
-		F3F6FDB81B360BB700CAACA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDB61B360BB700CAACA6 /* Main.storyboard */; };
 		F3F6FDBA1B360BB700CAACA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDB91B360BB700CAACA6 /* Images.xcassets */; };
 		F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */; };
 		F3F6FDC91B360BB700CAACA6 /* scrollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDC81B360BB700CAACA6 /* scrollTests.swift */; };
+		F3F6FDD31B360C4B00CAACA6 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */; };
+		F3F6FDD51B360D6000CAACA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */; };
+		F3F6FDD81B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDD61B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf */; };
+		F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDD71B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf */; };
+		F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +32,16 @@
 		F3F6FDAD1B360BB700CAACA6 /* scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F6FDB11B360BB700CAACA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F3F6FDB41B360BB700CAACA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F3F6FDB71B360BB700CAACA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F3F6FDB91B360BB700CAACA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F3F6FDBC1B360BB700CAACA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F3F6FDC21B360BB700CAACA6 /* scrollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scrollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F6FDC71B360BB700CAACA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3F6FDC81B360BB700CAACA6 /* scrollTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scrollTests.swift; sourceTree = "<group>"; };
+		F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F3F6FDD61B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Medium.otf"; sourceTree = "<group>"; };
+		F3F6FDD71B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Regular.otf"; sourceTree = "<group>"; };
+		F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +84,12 @@
 			isa = PBXGroup;
 			children = (
 				F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */,
-				F3F6FDB41B360BB700CAACA6 /* ViewController.swift */,
-				F3F6FDB61B360BB700CAACA6 /* Main.storyboard */,
+				F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */,
+				F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */,
+				F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */,
 				F3F6FDB91B360BB700CAACA6 /* Images.xcassets */,
 				F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */,
+				F3F6FDDA1B3615C500CAACA6 /* Fonts */,
 				F3F6FDB01B360BB700CAACA6 /* Supporting Files */,
 			);
 			path = scroll;
@@ -110,6 +118,15 @@
 				F3F6FDC71B360BB700CAACA6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F3F6FDDA1B3615C500CAACA6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F3F6FDD61B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf */,
+				F3F6FDD71B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +209,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3F6FDB81B360BB700CAACA6 /* Main.storyboard in Resources */,
 				F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */,
+				F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */,
+				F3F6FDD81B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf in Resources */,
 				F3F6FDBA1B360BB700CAACA6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,8 +230,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3F6FDB51B360BB700CAACA6 /* ViewController.swift in Sources */,
+				F3F6FDD31B360C4B00CAACA6 /* ComposeViewController.swift in Sources */,
 				F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */,
+				F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */,
+				F3F6FDD51B360D6000CAACA6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,14 +256,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F3F6FDB61B360BB700CAACA6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F3F6FDB71B360BB700CAACA6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -409,6 +421,7 @@
 				F3F6FDCE1B360BB700CAACA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F3F6FDCF1B360BB700CAACA6 /* Build configuration list for PBXNativeTarget "scrollTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +430,7 @@
 				F3F6FDD11B360BB700CAACA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
