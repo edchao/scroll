@@ -66,7 +66,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
 
         // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1)
+        view.backgroundColor = UIColor.neutralColor(alpha: 0.5)
         
         
         // TABLE SETUP
@@ -79,10 +79,11 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         table_home.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
         table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
         table_home.tableHeaderView = nil
+        table_home.backgroundColor = UIColor.neutralColor(alpha: 0)
         view.addSubview(table_home)
         
         // SETUP CONTAINER
-        contentContainer = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+        contentContainer = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 400))
         contentContainer.backgroundColor = UIColor.neutralColor(alpha: 0)
         view.addSubview(contentContainer)
         
@@ -94,7 +95,10 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         table_home.tableFooterView = UIView(frame: CGRect.zeroRect)
         self.table_home.rowHeight = UITableViewAutomaticDimension
         
-
+        // SETUP LOGIN CONTAINER SHIFT
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool){
@@ -108,6 +112,35 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // KEYBOARD BEHAVIOR
+    
+        func keyboardWillShow(notification: NSNotification!) {
+            var userInfo = notification.userInfo!
+            var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+            var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+            var animationDuration = durationValue.doubleValue
+            var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+            var animationCurve = curveValue.integerValue
+    
+            UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+                self.contentContainer.frame.size.height = self.view.frame.height - kbSize.height - self.table_home.contentSize.height - 20
+                }, completion: nil)
+        }
+    
+        func keyboardWillHide(notification: NSNotification!) {
+            var userInfo = notification.userInfo!
+            var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+            var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+            var animationDuration = durationValue.doubleValue
+            var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+            var animationCurve = curveValue.integerValue
+    
+            UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+                self.contentContainer.frame.size.height = self.view.frame.height - kbSize.height - self.table_home.contentSize.height - 20
+                }, completion: nil)
+        }
+    
     
     // CONTAINER SCROLL WITH TABLE
     
@@ -127,11 +160,11 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     // TABLE METHODS
 
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 300))
-        footerView.backgroundColor = UIColor.blackColor()
-        return footerView
-    }
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 300))
+//        footerView.backgroundColor = UIColor.blackColor()
+//        return footerView
+//    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
@@ -175,9 +208,9 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     // RANDOM
     // ------
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        return true
+//    }
     
 
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
+		F3C3AB801B3F4D7E0069100C /* empty.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C3AB7F1B3F4D7E0069100C /* empty.m */; };
 		F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */; };
 		F3F6FDBA1B360BB700CAACA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDB91B360BB700CAACA6 /* Images.xcassets */; };
 		F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */; };
@@ -29,6 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		088C2AA1A34DF6D6656F5C09 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3543D5C287A570B5240966E4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		F3C3AB7E1B3F4D7D0069100C /* scroll-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scroll-Bridging-Header.h"; sourceTree = "<group>"; };
+		F3C3AB7F1B3F4D7E0069100C /* empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = empty.m; sourceTree = "<group>"; };
 		F3F6FDAD1B360BB700CAACA6 /* scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F6FDB11B360BB700CAACA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +72,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97DBB7F4510348C7E472A8A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				088C2AA1A34DF6D6656F5C09 /* Pods.debug.xcconfig */,
+				4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0C17B467F71951DE029D067 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3543D5C287A570B5240966E4 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3F6FDA41B360BB600CAACA6 = {
 			isa = PBXGroup;
 			children = (
+				F354CEC41B3F4A9B00AE51CD /* Podfile */,
 				F3F6FDAF1B360BB700CAACA6 /* scroll */,
 				F3F6FDC51B360BB700CAACA6 /* scrollTests */,
 				F3F6FDAE1B360BB700CAACA6 /* Products */,
+				97DBB7F4510348C7E472A8A6 /* Pods */,
+				C0C17B467F71951DE029D067 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +121,8 @@
 				F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */,
 				F3F6FDDA1B3615C500CAACA6 /* Fonts */,
 				F3F6FDB01B360BB700CAACA6 /* Supporting Files */,
+				F3C3AB7F1B3F4D7E0069100C /* empty.m */,
+				F3C3AB7E1B3F4D7D0069100C /* scroll-Bridging-Header.h */,
 			);
 			path = scroll;
 			sourceTree = "<group>";
@@ -136,9 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3F6FDCC1B360BB700CAACA6 /* Build configuration list for PBXNativeTarget "scroll" */;
 			buildPhases = (
+				04CC3EBC4C64BEAC4CC6DDFC /* Check Pods Manifest.lock */,
 				F3F6FDA91B360BB700CAACA6 /* Sources */,
 				F3F6FDAA1B360BB700CAACA6 /* Frameworks */,
 				F3F6FDAB1B360BB700CAACA6 /* Resources */,
+				4B839583341F77DEF5E43301 /* Embed Pods Frameworks */,
+				B6E40081C081EE26F270D33C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -209,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */,
 				F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */,
 				F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */,
 				F3F6FDD81B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf in Resources */,
@@ -225,6 +261,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04CC3EBC4C64BEAC4CC6DDFC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4B839583341F77DEF5E43301 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6E40081C081EE26F270D33C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F3F6FDA91B360BB700CAACA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -233,6 +317,7 @@
 				F3F6FDD31B360C4B00CAACA6 /* ComposeViewController.swift in Sources */,
 				F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */,
 				F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */,
+				F3C3AB801B3F4D7E0069100C /* empty.m in Sources */,
 				F3F6FDD51B360D6000CAACA6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,21 +435,28 @@
 		};
 		F3F6FDCD1B360BB700CAACA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 088C2AA1A34DF6D6656F5C09 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = scroll/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "scroll/scroll-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F3F6FDCE1B360BB700CAACA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = scroll/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "scroll/scroll-Bridging-Header.h";
 			};
 			name = Release;
 		};

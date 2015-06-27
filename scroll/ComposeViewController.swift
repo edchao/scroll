@@ -30,9 +30,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     override func viewWillLayoutSubviews() {
+        
+        
         // TEXTFIELD
         
         textView_compose = UITextView(frame: CGRect(x: 12, y: 15, width: view.frame.width - 24, height: view.frame.height - 70))
+        textView_compose.backgroundColor = UIColor.whiteColor()
         textView_compose.textColor = UIColor.primaryColor(alpha: 1)
         textView_compose.editable = true
         textView_compose.userInteractionEnabled = true
@@ -79,6 +82,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    
+    
+    
     // TEXTVIEW BEHAVIOR
     
     
@@ -95,48 +101,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    // KEYBOARD BEHAVIOR
+
     
-//    func keyboardWillShow(notification: NSNotification!) {
-//        var userInfo = notification.userInfo!
-//        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-//        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-//        var animationDuration = durationValue.doubleValue
-//        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-//        var animationCurve = curveValue.integerValue
-//        
-//        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
-//            self.btn_cancel.center.y = self.view.frame.height - kbSize.height - 15
-//            self.btn_save.center.y = self.view.frame.height - kbSize.height - 15
-//            }, completion: nil)
-//    }
-//    
-//    func keyboardWillHide(notification: NSNotification!) {
-//        var userInfo = notification.userInfo!
-//        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-//        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-//        var animationDuration = durationValue.doubleValue
-//        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-//        var animationCurve = curveValue.integerValue
-//        
-//        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
-//            self.btn_cancel.center.y = self.view.frame.height - 15
-//            self.btn_save.center.y = self.view.frame.height - 15
-//            }, completion: nil)
-//    }
-//    
-//    func DismissKeyboard(){
-//        textView_compose.endEditing(true)
-//    }
+    func DismissKeyboard(){
+        textView_compose.endEditing(true)
+    }
     
     // BUTTON ACTIONS
     
-    func didTapCancel(){
-        //
+    func didTapCancel(sender:UIButton){
+        self.textView_compose.endEditing(true)
     }
 
-    func didTapSave(){
-        //
+    func didTapSave(sender:UIButton){
+        var temp = self.textView_compose.text
+        println(temp)
+        
     }
     
 }
