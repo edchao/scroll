@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
     
@@ -114,8 +116,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
 
     func didTapSave(sender:UIButton){
-        var temp = self.textView_compose.text
-        println(temp)
+
+        var note = PFObject(className: "Note")
+        note["text"] = self.textView_compose.text
+        note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("saved issue")
+            self.textView_compose.endEditing(true)
+        }
         
     }
     

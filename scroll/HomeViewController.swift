@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 extension UIColor {
     class func primaryColor(alpha: CGFloat = 1.0) -> UIColor {
@@ -62,8 +63,13 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     var composeVC: ComposeViewController! = ComposeViewController()
     var tableHeight : CGFloat! = 0
     
+    
+    // PARSE VARIABLES
+    var notes : [PFObject]! = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
 
         // SETUP VIEW
         view.backgroundColor = UIColor.neutralColor(alpha: 0.5)
@@ -101,16 +107,34 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    override func viewDidAppear(animated: Bool){
-        layoutTextView()
+    override func viewWillAppear(animated: Bool) {
+        getNotes { () -> Void in
+            self.layoutTextView()
+        }
     }
     
+    
+
+    // QUERIES
+    
+    func getNotes(completion:() -> Void){
+        var query = PFQuery(className: "Note")
+        query.addDescendingOrder("updatedAt")
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            UIView.animateWithDuration(0, animations: { () -> Void in
+                self.notes = objects as! [PFObject]?
+                self.table_home.reloadData()
+            }, completion: { (Bool) -> Void in
+                completion()
+            })
+
+        }
+    }
     
     // MEMORY HANDLING
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // KEYBOARD BEHAVIOR
@@ -160,11 +184,6 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     // TABLE METHODS
 
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 300))
-//        footerView.backgroundColor = UIColor.blackColor()
-//        return footerView
-//    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
@@ -176,7 +195,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return self.notes.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -191,9 +210,9 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var item = data[indexPath.row]
+        var note = self.notes[indexPath.row]
         var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
-        cell.label_text.text = item as String!
+        cell.label_text.text = note["text"] as! String!
         
         tableHeight = self.table_home.contentSize.height
         
