@@ -10,6 +10,11 @@ import UIKit
 import Parse
 import Bolts
 
+protocol ComposeDelegate {
+    func reloadHomeTable(sender: ComposeViewController)
+}
+
+
 class ComposeViewController: UIViewController, UITextViewDelegate {
     
     // CLASS VARS
@@ -20,14 +25,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     var btn_save: UIButton!
     var vIndent: CGFloat! = 110.0
     var hIndent : CGFloat = 30.0
+    
+    // DELEGATE VARS
+    
+    var delegate: ComposeDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // REGISTER KEYBOARD
-        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
 
     }
     
@@ -121,6 +125,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         note["text"] = self.textView_compose.text
         note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             println("saved issue")
+            self.delegate?.reloadHomeTable(self)
             self.textView_compose.endEditing(true)
         }
         

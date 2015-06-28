@@ -54,7 +54,7 @@ var data : Array! = [
 
 let screenSize : CGRect = UIScreen.mainScreen().bounds
 
-class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, ComposeDelegate {
 
     // CLASS VARS
     
@@ -95,6 +95,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         // ADD CHILD VC
         self.addChildViewController(self.composeVC)
+        self.composeVC.delegate = self
         self.composeVC.view.frame = self.contentContainer.frame
         self.contentContainer.addSubview(self.composeVC.view)
         
@@ -113,13 +114,21 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
     }
     
+    // DELEGATE METHOD
     
+    func reloadHomeTable(sender:ComposeViewController){
+        self.getNotes { () -> Void in
+            self.layoutTextView()
+            println("reloaded table")
+        }
+        
+    }
 
     // QUERIES
     
     func getNotes(completion:() -> Void){
         var query = PFQuery(className: "Note")
-        query.addDescendingOrder("updatedAt")
+        query.addAscendingOrder("updatedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
