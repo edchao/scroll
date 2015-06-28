@@ -14,11 +14,22 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var keys: NSDictionary?
+
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        Parse.setApplicationId("KsQENFMSzQvdPTlqS8F4qWGivG9g322jk9k9Ql3X",
-            clientKey: "V8HcFooWmNZds6jLRMvFCbo7aczXGg04thTEcHGY")
-        PFUser.enableAutomaticUser()
+        
+        if let path = NSBundle.mainBundle().pathForResource("keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        if let dict = keys {
+            let applicationId = keys?["parseApplicationId"] as? String
+            let clientKey = keys?["parseClientKey"] as? String
+            
+            // Initialize Parse.
+            Parse.setApplicationId(applicationId!, clientKey: clientKey!)
+        }
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {

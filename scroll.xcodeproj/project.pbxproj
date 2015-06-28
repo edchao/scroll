@@ -10,6 +10,7 @@
 		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
 		F3C3AB801B3F4D7E0069100C /* empty.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C3AB7F1B3F4D7E0069100C /* empty.m */; };
+		F3E2B0A21B3FBB9300CC7B45 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3E2B0A11B3FBB9300CC7B45 /* keys.plist */; };
 		F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */; };
 		F3F6FDBA1B360BB700CAACA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDB91B360BB700CAACA6 /* Images.xcassets */; };
 		F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */; };
@@ -38,6 +39,7 @@
 		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		F3C3AB7E1B3F4D7D0069100C /* scroll-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scroll-Bridging-Header.h"; sourceTree = "<group>"; };
 		F3C3AB7F1B3F4D7E0069100C /* empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = empty.m; sourceTree = "<group>"; };
+		F3E2B0A11B3FBB9300CC7B45 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		F3F6FDAD1B360BB700CAACA6 /* scroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F6FDB11B360BB700CAACA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F3F6FDB11B360BB700CAACA6 /* Info.plist */,
+				F3E2B0A11B3FBB9300CC7B45 /* keys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			files = (
 				F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */,
 				F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */,
+				F3E2B0A21B3FBB9300CC7B45 /* keys.plist in Resources */,
 				F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */,
 				F3F6FDD81B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf in Resources */,
 				F3F6FDBA1B360BB700CAACA6 /* Images.xcassets in Resources */,
