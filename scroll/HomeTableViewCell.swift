@@ -19,14 +19,15 @@ class HomeTableViewCell: UITableViewCell, UITextViewDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.backgroundColor = UIColor.neutralColor(alpha: 0.5)
+        self.contentView.backgroundColor = UIColor.clearColor()
         
         // LABEL
         label_text = UILabel(frame: CGRectMake(30, 30, self.bounds.size.width, 25))
         label_text.textColor = UIColor.primaryColor(alpha: 1)
-        label_text.font = UIFont.primaryFont()
+        label_text.font = UIFont.tertiaryFont()
         label_text.numberOfLines = 0
         self.contentView.addSubview(label_text)
+        
         
         self.layout()
         
@@ -52,9 +53,9 @@ class HomeTableViewCell: UITableViewCell, UITextViewDelegate {
         
         // POSITIONS
         
-        let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-15-[label_text]-15-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
+        let view_constraint_H:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[label_text]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
-        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[label_text]-20-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
+        let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[label_text]-30-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
         self.contentView.addConstraints(view_constraint_H as [AnyObject])
         self.contentView.addConstraints(view_constraint_V as [AnyObject])

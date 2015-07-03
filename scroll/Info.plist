@@ -32,6 +32,7 @@
 	<array>
 		<string>SanFranciscoDisplay-Medium.otf</string>
 		<string>SanFranciscoDisplay-Regular.otf</string>
+		<string>PTSerif.ttc</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
