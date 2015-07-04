@@ -19,7 +19,7 @@ class HomeTableViewCell: UITableViewCell, UITextViewDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.backgroundColor = UIColor.clearColor()
+        self.contentView.backgroundColor = UIColor.neutralColor(alpha: 1.0)
         
         // LABEL
         label_text = UILabel(frame: CGRectMake(30, 30, self.bounds.size.width, 25))

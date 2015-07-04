@@ -20,6 +20,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     // CLASS VARS
     
+    var corner_left: UIImageView!
+    var corner_right: UIImageView!
+    var corner_bottom_left: UIImageView!
+    var corner_bottom_right: UIImageView!
     var overlay: UIView!
     var card : UIView!
     var stroke_card : UIView!
@@ -66,7 +70,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         // STROKE CARD
         
         stroke_card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_card.backgroundColor = UIColor.primaryColor(alpha: 0.1)
+        stroke_card.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
         card.addSubview(stroke_card)
         
         // TEXTFIELD
@@ -113,6 +117,23 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         btn_save.setTitle("Save", forState: .Normal)
         btn_save.addTarget(self, action: "didTapSave:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_save)
+        
+        // CORNER MASKS
+        corner_left = UIImageView(image: UIImage(named: "corner_left"))
+        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
+        view.addSubview(corner_left)
+        
+        corner_right = UIImageView(image: UIImage(named: "corner_right"))
+        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
+        view.addSubview(corner_right)
+        
+        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
+        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
+        view.addSubview(corner_bottom_left)
+        
+        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
+        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
+        view.addSubview(corner_bottom_right)
         
         
         // KEYBOARD
@@ -193,7 +214,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     func didTapCancel(sender:UIButton){
         self.textView_compose.endEditing(true)
         delay(0.5, closure: { () -> () in
-            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.dismissViewControllerAnimated(false, completion: { () -> Void in
                 //
             })
         })
@@ -209,7 +230,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             self.textView_compose.text = ""
             self.delegate?.reloadHomeTable(self)
             self.textView_compose.endEditing(true)
-            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.dismissViewControllerAnimated(false, completion: { () -> Void in
                 //
             })
         }

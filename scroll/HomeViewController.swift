@@ -27,7 +27,7 @@ extension UIColor {
     }
     
     class func neutralColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: alpha)
+        return UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: alpha)
     }
     
     class func strokeColor(alpha: CGFloat = 1.0) -> UIColor {
@@ -59,13 +59,19 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
 
     // CLASS VARS
     
+    var corner_left: UIImageView!
+    var corner_right: UIImageView!
+    var corner_bottom_left: UIImageView!
+    var corner_bottom_right: UIImageView!
     var table_home : UITableView = UITableView()
     var contentContainer : UIView!
     var composeVC: ComposeViewController! = ComposeViewController()
-    var tableHeight : CGFloat! = 0
+    var tableHeight : CGFloat!
     var btn_compose : UIButton!
     var stroke_compose: UIView!
-
+    var stroke_status :UIView!
+    var tableOffset : CGPoint!
+    var sectionCount : Int!
     
     
     // PARSE VARIABLES
@@ -96,7 +102,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         table_home.tableFooterView = UIView(frame: CGRect.zeroRect)
         self.table_home.rowHeight = UITableViewAutomaticDimension
         
-        
+        tableOffset = CGPoint(x: 0, y: 0)
 
         // COMPOSE
         
@@ -115,9 +121,33 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         // STROKE COMPOSE
         
         stroke_compose = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_compose.backgroundColor = UIColor.primaryColor(alpha: 0.1)
+        stroke_compose.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
         btn_compose.addSubview(stroke_compose)
         
+        // STROKE COMPOSE
+        
+        stroke_status = UIView(frame: CGRect(x: 0, y: 20, width: view.frame.width, height: 1))
+        stroke_status.backgroundColor = UIColor.strokeColor(alpha: 1)
+        stroke_status.alpha = 0
+        view.addSubview(stroke_status)
+        
+        
+        // CORNER MASKS
+        corner_left = UIImageView(image: UIImage(named: "corner_left"))
+        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
+        view.addSubview(corner_left)
+        
+        corner_right = UIImageView(image: UIImage(named: "corner_right"))
+        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
+        view.addSubview(corner_right)
+        
+        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
+        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
+        view.addSubview(corner_bottom_left)
+        
+        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
+        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
+        view.addSubview(corner_bottom_right)
         
         // MISC INIT
         
@@ -135,12 +165,15 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
     }
     
-    // SCROLL TO BOTTOm
+    // SCROLL TO BOTTOM
     
     func scrollToBottom(animated: Bool) {
+
         
         let delay = 0.1 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        self.table_home.contentOffset.y = self.tableOffset.y
         
         dispatch_after(time, dispatch_get_main_queue(), {
             
@@ -181,6 +214,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     // QUERIES
     
     func getNotes(completion:() -> Void){
+        tableOffset = table_home.contentOffset
         var query = PFQuery(className: "Note")
         query.addAscendingOrder("updatedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -188,6 +222,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
                 self.notes = objects as! [PFObject]?
                 self.table_home.reloadData()
             }, completion: { (Bool) -> Void in
+                self.getSections()
                 completion()
             })
 
@@ -195,9 +230,34 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
 
+    // GET SECTIONS
+    func getSections(){
+        var dateArray: Array<String> = []
+
+        for item in notes {
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "EEEE, MMMM d YYYY"
+            dateArray.append(dateFormatter.stringFromDate(item.createdAt!))
+            
+        }
+        sectionCount = NSSet(array: dateArray).count
+        println(sectionCount)
+    }
     
     // TABLE METHODS
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if table_home.contentOffset.y > 0 {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.stroke_status.alpha = 1
+            })
+        }else{
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.stroke_status.alpha = 0
+            })
+        }
+    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
@@ -207,10 +267,19 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         return UITableViewAutomaticDimension
     }
     
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.notes.count
     }
+    
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return sectionCount
+//    }
+    
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "hello"
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -221,6 +290,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
@@ -238,8 +308,10 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
                             self.table_home.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 
                             self.getNotes({ () -> Void in
-                                //
+//                                self.table_home.contentOffset.y = self.tableOffset.y
+                                self.table_home.setContentOffset(self.tableOffset, animated: true)
                             })
+                            
                         }
                         else {
                             println(error)
@@ -262,6 +334,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         var note = self.notes[indexPath.row]
         var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
         cell.label_text.text = note["text"] as! String!
+        
         cell.backgroundColor = UIColor.clearColor()
         
         tableHeight = self.table_home.contentSize.height
@@ -295,6 +368,16 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
             let names = UIFont.fontNamesForFamilyName(familyName as! String)
             println("Font Names = [\(names)]")
         }
+    }
+    
+    // DELAY
+    
+    func delay(delay:Double, closure:()->()) {
+        
+        dispatch_after(
+            dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+        
+        
     }
 
 }
