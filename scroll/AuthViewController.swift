@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Parse
 
-class AuthViewController: UIViewController {
+class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
     // CLASS VARS
@@ -23,9 +24,7 @@ class AuthViewController: UIViewController {
     var stroke_email: UIView!
     var stroke_password : UIView!
     var input_email : UITextField!
-    var label_email : UILabel!
     var input_pw : UITextField!
-    var label_pw : UILabel!
     var btn_login: UIButton!
     var btn_create: UIButton!
     
@@ -109,7 +108,7 @@ class AuthViewController: UIViewController {
         btn_create.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
         btn_create.titleLabel!.font = UIFont.primaryFont()
         btn_create.setTitle("Create Account", forState: .Normal)
-        btn_create.addTarget(self, action: "didTapCreate:", forControlEvents: .TouchUpInside)
+        btn_create.addTarget(self, action: "didTapSignUp:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_create)
         
         
@@ -142,8 +141,6 @@ class AuthViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
     
     
     
@@ -181,6 +178,60 @@ class AuthViewController: UIViewController {
     }
     
 
+    
+    // SIGN UP
+    
+    func didTapSignUp(sender:AnyObject){
+        
+        var user = PFUser()
+        user.username = self.input_email.text.lowercaseString
+        user.password = self.input_pw.text
+        
+        user.signUpInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                println("successful sign up")
+                let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                self.definesPresentationContext = true
+                homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+                homeVC.transitioningDelegate = self
+                self.presentViewController(homeVC, animated: false) { () -> Void in
+                    //
+                }
+
+                
+            }else{
+                var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+            }
+        }
+
+
+        
+    }
+
+    
+    
+    // SIGN IN AND SIGN UP BUTTON FUNCTIONALITY
+    
+    func didTapLogin(sender:AnyObject){
+        
+        PFUser.logInWithUsernameInBackground(input_email.text.lowercaseString, password:input_pw.text) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                self.definesPresentationContext = true
+                homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+                homeVC.transitioningDelegate = self
+                self.presentViewController(homeVC, animated: false) { () -> Void in
+                    //
+                }
+
+            } else {
+                var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+            }
+        }
+    }
 
 
 }

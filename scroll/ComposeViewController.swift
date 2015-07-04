@@ -225,6 +225,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
 
         var note = PFObject(className: "Note")
         note["text"] = self.textView_compose.text
+        note["user"] = PFUser.currentUser()
+
         note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             println("saved issue")
             self.textView_compose.text = ""
