@@ -9,10 +9,40 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="corner_bottom_left" translatesAutoresizingMaskIntoConstraints="NO" id="HxL-Va-SQp">
+                    <rect key="frame" x="0.0" y="474" width="6" height="6"/>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="corner_bottom_right" translatesAutoresizingMaskIntoConstraints="NO" id="Gc4-DP-YLX">
+                    <rect key="frame" x="474" y="474" width="6" height="6"/>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="corner_left" translatesAutoresizingMaskIntoConstraints="NO" id="s22-eI-Joy">
+                    <rect key="frame" x="0.0" y="0.0" width="6" height="6"/>
+                </imageView>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="corner_right" translatesAutoresizingMaskIntoConstraints="NO" id="jFT-ci-L7z">
+                    <rect key="frame" x="474" y="0.0" width="6" height="6"/>
+                </imageView>
+            </subviews>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Gc4-DP-YLX" secondAttribute="trailing" id="2aW-3A-vng"/>
+                <constraint firstItem="s22-eI-Joy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BlA-Aw-2fM"/>
+                <constraint firstItem="HxL-Va-SQp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Myk-o3-2b9"/>
+                <constraint firstAttribute="bottom" secondItem="HxL-Va-SQp" secondAttribute="bottom" id="Rdh-I8-lak"/>
+                <constraint firstItem="s22-eI-Joy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cae-8h-pVE"/>
+                <constraint firstItem="jFT-ci-L7z" firstAttribute="top" secondItem="s22-eI-Joy" secondAttribute="top" id="fba-qO-dTV"/>
+                <constraint firstAttribute="bottom" secondItem="Gc4-DP-YLX" secondAttribute="bottom" id="pF1-zN-SLN"/>
+                <constraint firstAttribute="trailing" secondItem="jFT-ci-L7z" secondAttribute="trailing" id="wVB-7i-qGU"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="corner_bottom_left" width="6" height="6"/>
+        <image name="corner_bottom_right" width="6" height="6"/>
+        <image name="corner_left" width="6" height="6"/>
+        <image name="corner_right" width="6" height="6"/>
+    </resources>
 </document>
