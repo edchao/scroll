@@ -19,6 +19,9 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var corner_bottom_left: UIImageView!
     var corner_bottom_right: UIImageView!
     
+    var logotype: UIImageView!
+    var label_punchline: UILabel!
+    
     var card : UIView!
     var stroke_card : UIView!
     var stroke_email: UIView!
@@ -41,6 +44,26 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
         
         
+        // LOGOTYPE
+        
+        logotype = UIImageView(image: UIImage(named: "logotype"))
+        logotype.frame = CGRect(x: 0, y: 0, width: 70, height: 27)
+        logotype.center.y = screenSize.height * 0.25
+        logotype.center.x = view.center.x
+        view.addSubview(logotype)
+
+        // label_punchline
+        
+        label_punchline = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 140))
+        label_punchline.text = "One note to remember all the things"
+        label_punchline.numberOfLines = 2
+        label_punchline.textAlignment = .Center
+        label_punchline.font = UIFont.tertiaryFont()
+        label_punchline.textColor = UIColor.primaryColor(alpha: 1.0)
+        label_punchline.center.y = screenSize.height * 0.4
+        label_punchline.center.x = view.center.x
+        view.addSubview(label_punchline)
+        
         // CARD
         
         card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 160))
@@ -58,18 +81,18 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         stroke_card.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
         card.addSubview(stroke_card)
         
-        stroke_email = UIView(frame: CGRect(x: 15, y: 50, width: view.frame.width - 15, height: 1))
+        stroke_email = UIView(frame: CGRect(x: 20, y: 50, width: view.frame.width - 20, height: 1))
         stroke_email.backgroundColor = UIColor.strokeColor(alpha: 1.0)
         card.addSubview(stroke_email)
         
-        stroke_password = UIView(frame: CGRect(x: 15, y: 100, width: view.frame.width - 15, height: 1))
+        stroke_password = UIView(frame: CGRect(x: 20, y: 100, width: view.frame.width - 20, height: 1))
         stroke_password.backgroundColor = UIColor.strokeColor(alpha: 1.0)
         card.addSubview(stroke_password)
         
         
         // TEXTFIELDS
         
-        input_email = UITextField(frame: CGRect(x: 15, y: 6, width: view.frame.width - 20, height: 40))
+        input_email = UITextField(frame: CGRect(x: 20, y: 6, width: view.frame.width - 40, height: 40))
         input_email.backgroundColor = UIColor.clearColor()
         input_email.textColor = UIColor.primaryColor(alpha: 1)
         input_email.userInteractionEnabled = true
@@ -77,7 +100,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         input_email.placeholder = "Email"
         card.addSubview(input_email)
         
-        input_pw = UITextField(frame: CGRect(x: 15, y: 56, width: view.frame.width - 20, height: 40))
+        input_pw = UITextField(frame: CGRect(x: 20, y: 56, width: view.frame.width - 40, height: 40))
         input_pw.backgroundColor = UIColor.clearColor()
         input_pw.textColor = UIColor.primaryColor(alpha: 1)
         input_pw.userInteractionEnabled = true
@@ -156,6 +179,10 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
             
+            self.logotype.center.y = screenSize.height * 0.2
+            self.label_punchline.center.y = screenSize.height * 0.35
+            self.label_punchline.alpha = 0
+            
             self.card.backgroundColor = UIColor.whiteColor()
             self.card.layer.shadowOpacity = 0.3
             self.card.center.y = screenSize.height - kbSize.height - self.card.frame.height/2
@@ -171,6 +198,11 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         var animationCurve = curveValue.integerValue
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+            
+            self.logotype.center.y = screenSize.height * 0.25
+            self.label_punchline.center.y = screenSize.height * 0.4
+            self.label_punchline.alpha = 1
+            
             self.card.layer.shadowOpacity = 0
             self.card.backgroundColor = UIColor.whiteColor()
             self.card.center.y = self.card_origin_y
@@ -190,13 +222,29 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         user.signUpInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 println("successful sign up")
-                let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-                self.definesPresentationContext = true
-                homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-                homeVC.transitioningDelegate = self
-                self.presentViewController(homeVC, animated: false) { () -> Void in
-                    //
-                }
+                
+                self.input_email.endEditing(true)
+                self.input_pw.endEditing(true)
+                
+                UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                    self.card.center.y = self.card_origin_y + 110
+                    }, completion: { (Bool) -> Void in
+                        self.delay(0.2, closure: { () -> () in
+                            let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                            self.definesPresentationContext = true
+                            homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+                            homeVC.transitioningDelegate = self
+                            self.presentViewController(homeVC, animated: false) { () -> Void in
+                                //
+                            }
+                        })
+                })
+                
+
+
+                
+                
+
 
                 
             }else{
@@ -218,19 +266,40 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         PFUser.logInWithUsernameInBackground(input_email.text.lowercaseString, password:input_pw.text) {
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
-                let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-                self.definesPresentationContext = true
-                homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-                homeVC.transitioningDelegate = self
-                self.presentViewController(homeVC, animated: false) { () -> Void in
-                    //
-                }
+                
+                self.input_email.endEditing(true)
+                self.input_pw.endEditing(true)
+                
+                UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                    self.card.center.y = self.card_origin_y + 110
+                }, completion: { (Bool) -> Void in
+                    let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                    self.definesPresentationContext = true
+                    homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+                    homeVC.transitioningDelegate = self
+                    self.presentViewController(homeVC, animated: false) { () -> Void in
+                        //
+                    }
+                })
+                
+
 
             } else {
                 var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
                 alertView.show()
             }
         }
+    }
+    
+    
+    // DELAY
+    
+    func delay(delay:Double, closure:()->()) {
+        
+        dispatch_after(
+            dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+        
+        
     }
 
 

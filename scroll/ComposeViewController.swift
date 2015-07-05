@@ -58,8 +58,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         // CARD
         
-        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
-        card_origin_y = view.frame.height + 100
+        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 280))
+        card_origin_y = view.frame.height + 90
         card.center.y = card_origin_y
         card.backgroundColor = UIColor.whiteColor()
         card.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -94,25 +94,25 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         
         // BUTTONS
-        btn_cancel = UIButton(frame: CGRect(x: 20, y: 0, width: 70, height: 30))
+        btn_cancel = UIButton(frame: CGRect(x: 20, y: 0, width: 54, height: 30))
         btn_cancel.center.y = card.frame.height - 30
         btn_cancel.backgroundColor = UIColor.neutralColor(alpha: 0)
         btn_cancel.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
         btn_cancel.layer.cornerRadius = 4
         btn_cancel.layer.borderWidth = 1
-        btn_cancel.layer.borderColor = UIColor.primaryAccent(alpha: 0.2).CGColor
+        btn_cancel.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
         btn_cancel.titleLabel!.font = UIFont.primaryFont()
         btn_cancel.setTitle("Cancel", forState: .Normal)
         btn_cancel.addTarget(self, action: "didTapCancel:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_cancel)
         
-        btn_save = UIButton(frame: CGRect(x: view.frame.width - 85, y: 30, width: 60, height: 30))
+        btn_save = UIButton(frame: CGRect(x: view.frame.width - 38 - 20, y: 30, width: 38, height: 30))
         btn_save.center.y = card.frame.height - 30
         btn_save.backgroundColor = UIColor.neutralColor(alpha: 0)
         btn_save.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
         btn_save.layer.cornerRadius = 4
         btn_save.layer.borderWidth = 1
-        btn_save.layer.borderColor = UIColor.primaryAccent(alpha: 0.2).CGColor
+        btn_save.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
         btn_save.titleLabel!.font = UIFont.primaryFont()
         btn_save.setTitle("Save", forState: .Normal)
         btn_save.addTarget(self, action: "didTapSave:", forControlEvents: .TouchUpInside)
