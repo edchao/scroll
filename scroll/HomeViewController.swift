@@ -217,7 +217,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         tableOffset = table_home.contentOffset
         var query = PFQuery(className: "Note")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
-        query.addAscendingOrder("updatedAt")
+        query.addAscendingOrder("createdAt")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
