@@ -12,6 +12,7 @@ import Bolts
 
 protocol ActionSheetDelegate {
     func deleteNote(sender: ActionSheetViewController, indexPath: NSIndexPath)
+    func editNote(sender: ActionSheetViewController, indexPath: NSIndexPath)
 }
 
 
@@ -112,13 +113,26 @@ class ActionSheetViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func didTapEdit(sender:UIButton) {
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            self.card.layer.shadowOpacity = 0
+            self.overlay.alpha = 0
+            self.card.center.y = self.card_origin_y
+            }) { (Bool) -> Void in
+                self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                    delegate?.editNote(self, indexPath: self.indexPath)
+                })
+        }
+    }
+    
     
     func didTapDelete(sender:UIButton) {
-        println(self.indexPath)
         delegate?.deleteNote(self, indexPath: self.indexPath)
+        didTapCancel(self)
     }
 
-    func didTapCancel(sender:UIButton){
+
+    func didTapCancel(sender:AnyObject){
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
             self.card.layer.shadowOpacity = 0
             self.overlay.alpha = 0

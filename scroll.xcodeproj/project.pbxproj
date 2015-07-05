@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F32A81661B49EAD000747A07 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A81651B49EAD000747A07 /* EditViewController.swift */; };
 		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
 		F39C74191B45E4F000E12470 /* PTSerif.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F39C74181B45E4F000E12470 /* PTSerif.ttc */; };
 		F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */; };
@@ -39,6 +40,7 @@
 		088C2AA1A34DF6D6656F5C09 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3543D5C287A570B5240966E4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F32A81651B49EAD000747A07 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		F39C74181B45E4F000E12470 /* PTSerif.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSerif.ttc; sourceTree = "<group>"; };
 		F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */,
 				F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */,
 				F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */,
+				F32A81651B49EAD000747A07 /* EditViewController.swift */,
 				F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */,
 				F3F6FDB91B360BB700CAACA6 /* Images.xcassets */,
 				F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */,
@@ -328,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F32A81661B49EAD000747A07 /* EditViewController.swift in Sources */,
 				F3F6FDD31B360C4B00CAACA6 /* ComposeViewController.swift in Sources */,
 				F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */,
 				F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */,

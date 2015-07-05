@@ -63,7 +63,7 @@ extension UIFont {
 
 let screenSize : CGRect = UIScreen.mainScreen().bounds
 
-class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ComposeDelegate, ActionSheetDelegate {
+class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ComposeDelegate, ActionSheetDelegate, EditDelegate {
 
     // CLASS VARS
     
@@ -209,7 +209,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
     }
     
-    // DELEGATE METHOD
+    // DELEGATE METHODS
     
     func reloadHomeTable(sender:ComposeViewController){
         self.getNotes { () -> Void in
@@ -219,8 +219,30 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
     }
     
+    func editHomeTable(sender:EditViewController){
+        self.getNotes { () -> Void in
+            println("reloaded table")
+            self.scrollToBottom(true)
+        }
+        
+    }
+    
+    func editNote(sender: ActionSheetViewController, indexPath: NSIndexPath) {
+        let editVC: EditViewController = EditViewController(nibName: nil, bundle: nil)
+        self.definesPresentationContext = true
+        editVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        editVC.transitioningDelegate = self
+        editVC.delegate = self
+        editVC.indexPath = indexPath
+        editVC.noteId = self.notes[indexPath.row].objectId
+        editVC.noteText = self.notes[indexPath.row]["text"] as! String!
+        self.presentViewController(editVC, animated: false) { () -> Void in
+            //
+        }
+
+    }
+    
     func deleteNote(sender:ActionSheetViewController, indexPath: NSIndexPath){
-        println("delegate delete!")
         var query = PFQuery(className:"Note")
         self.noteId = self.notes[indexPath.row].objectId
         query.getObjectInBackgroundWithId(self.noteId) {

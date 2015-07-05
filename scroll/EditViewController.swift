@@ -1,8 +1,8 @@
 //
-//  ComposeViewController.swift
+//  EditViewController.swift
 //  scroll
 //
-//  Created by Ed Chao on 6/20/15.
+//  Created by Ed Chao on 7/5/15.
 //  Copyright (c) 2015 Ed Chao. All rights reserved.
 //
 
@@ -10,13 +10,11 @@ import UIKit
 import Parse
 import Bolts
 
-protocol ComposeDelegate {
-    func reloadHomeTable(sender: ComposeViewController)
+protocol EditDelegate {
+    func editHomeTable(sender: EditViewController)
 }
 
-
-class ComposeViewController: UIViewController, UITextViewDelegate {
-    
+class EditViewController: UIViewController {
     
     // CLASS VARS
     
@@ -38,11 +36,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     // DELEGATE VARS
     
-    var delegate: ComposeDelegate?
+    var delegate: EditDelegate?
+    var indexPath: NSIndexPath!
+    var noteId : String! = "000"
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -76,15 +77,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         // TEXTFIELD
         
-        textView_compose = UITextView(frame: CGRect(x: 15, y: 10, width: view.frame.width - 20, height: 220))
+        textView_compose = UITextView(frame: CGRect(x: 15, y: 6, width: view.frame.width - 20, height: 220))
         textView_compose.backgroundColor = UIColor.clearColor()
         textView_compose.textColor = UIColor.primaryColor(alpha: 1)
         textView_compose.editable = true
         textView_compose.userInteractionEnabled = true
         textView_compose.font = UIFont.primaryFont()
         card.addSubview(textView_compose)
-        textView_compose.delegate = self
-                
+        
         // LABEL
         label_compose = UILabel(frame: CGRect(x: 20, y: 10, width: view.frame.width, height: 30))
         label_compose.textColor = UIColor.primaryColor(alpha: 0.5)
@@ -142,9 +142,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -152,6 +152,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     override func viewDidAppear(animated: Bool) {
         textView_compose.becomeFirstResponder()
         textView_compose.text = noteText
+        self.label_compose.hidden = true
+
     }
     
     // KEYBOARD BEHAVIOR
@@ -191,7 +193,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     func DismissKeyboard(){
         textView_compose.endEditing(true)
     }
-
+    
     
     
     // TEXTVIEW BEHAVIOR
@@ -209,7 +211,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             self.label_compose.hidden = false
         }
     }
-
+    
     
     // BUTTON ACTIONS
     
@@ -220,24 +222,31 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 //
             })
         })
-
+        
     }
-
+    
     func didTapSave(sender:UIButton){
 
-        var note = PFObject(className: "Note")
-        note["text"] = self.textView_compose.text
-        note["user"] = PFUser.currentUser()
+        var query = PFQuery(className:"Note")
+        query.getObjectInBackgroundWithId(self.noteId) {
+            (note: PFObject?, error: NSError?) -> Void in
+            if error == nil && note != nil {
+                note!["text"] = self.textView_compose.text
+                note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                    println("saved issue")
+                    self.textView_compose.text = ""
+                    self.delegate?.editHomeTable(self)
+                    self.textView_compose.endEditing(true)
+                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                        //
+                    })
+                }
 
-        note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("saved issue")
-            self.textView_compose.text = ""
-            self.delegate?.reloadHomeTable(self)
-            self.textView_compose.endEditing(true)
-            self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                //
-            })
+            } else {
+                println(error)
+            }
         }
+
         
     }
     
@@ -253,4 +262,5 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         
     }
+
 }
