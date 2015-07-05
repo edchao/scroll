@@ -41,8 +41,16 @@ extension UIFont {
         return UIFont(name: "SanFranciscoDisplay-Regular", size: 18.0)!
     }
     
+    class func primaryFontLarge() -> UIFont {
+        return UIFont(name: "SanFranciscoDisplay-Regular", size: 20.0)!
+    }
+    
     class func secondaryFont() -> UIFont {
         return UIFont(name: "SanFranciscoDisplay-Medium", size: 18.0)!
+    }
+    
+    class func secondaryFontLarge() -> UIFont {
+        return UIFont(name: "SanFranciscoDisplay-Medium", size: 20.0)!
     }
     
     class func tertiaryFont() -> UIFont {
@@ -55,7 +63,7 @@ extension UIFont {
 
 let screenSize : CGRect = UIScreen.mainScreen().bounds
 
-class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, ComposeDelegate, UIViewControllerTransitioningDelegate {
+class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ComposeDelegate, ActionSheetDelegate {
 
     // CLASS VARS
     
@@ -210,6 +218,37 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         }
         
     }
+    
+    func deleteNote(sender:ActionSheetViewController, indexPath: NSIndexPath){
+        println("delegate delete!")
+        var query = PFQuery(className:"Note")
+        self.noteId = self.notes[indexPath.row].objectId
+        query.getObjectInBackgroundWithId(self.noteId) {
+            (note: PFObject?, error: NSError?) -> Void in
+            if error == nil && note != nil {
+                println(note)
+                
+                note?.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
+                    if error == nil && success == true {
+                        self.notes.removeAtIndex(indexPath.row)
+                        self.table_home.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                        
+                        self.getNotes({ () -> Void in
+                            self.table_home.setContentOffset(self.tableOffset, animated: true)
+                        })
+                        
+                    }
+                    else {
+                        println(error)
+                    }
+                })
+            } else {
+                println(error)
+            }
+        }
+
+
+    }
 
     // QUERIES
     
@@ -285,6 +324,16 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        let actionVC: ActionSheetViewController = ActionSheetViewController(nibName: nil, bundle: nil)
+        self.definesPresentationContext = true
+        actionVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        actionVC.transitioningDelegate = self
+        actionVC.delegate = self
+        actionVC.indexPath = indexPath
+        self.presentViewController(actionVC, animated: false) { () -> Void in
+            //
+        }
+
         
     }
     
@@ -309,7 +358,6 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
                             self.table_home.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 
                             self.getNotes({ () -> Void in
-//                                self.table_home.contentOffset.y = self.tableOffset.y
                                 self.table_home.setContentOffset(self.tableOffset, animated: true)
                             })
                             

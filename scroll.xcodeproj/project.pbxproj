@@ -10,6 +10,7 @@
 		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
 		F39C74191B45E4F000E12470 /* PTSerif.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F39C74181B45E4F000E12470 /* PTSerif.ttc */; };
+		F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */; };
 		F3B941701B48833D00287B20 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9416F1B48833D00287B20 /* AuthViewController.swift */; };
 		F3C3AB801B3F4D7E0069100C /* empty.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C3AB7F1B3F4D7E0069100C /* empty.m */; };
 		F3E2B0A41B3FC0C800CC7B45 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3E2B0A31B3FC0C800CC7B45 /* keys.plist */; };
@@ -40,6 +41,7 @@
 		4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		F39C74181B45E4F000E12470 /* PTSerif.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSerif.ttc; sourceTree = "<group>"; };
+		F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
 		F3B9416F1B48833D00287B20 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F3C3AB7E1B3F4D7D0069100C /* scroll-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scroll-Bridging-Header.h"; sourceTree = "<group>"; };
 		F3C3AB7F1B3F4D7E0069100C /* empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = empty.m; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */,
 				F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */,
 				F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */,
+				F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */,
 				F3F6FDB91B360BB700CAACA6 /* Images.xcassets */,
 				F3F6FDBB1B360BB700CAACA6 /* LaunchScreen.xib */,
 				F3F6FDDA1B3615C500CAACA6 /* Fonts */,
@@ -329,6 +332,7 @@
 				F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */,
 				F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */,
 				F3C3AB801B3F4D7E0069100C /* empty.m in Sources */,
+				F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */,
 				F3B941701B48833D00287B20 /* AuthViewController.swift in Sources */,
 				F3F6FDD51B360D6000CAACA6 /* HomeViewController.swift in Sources */,
 			);
