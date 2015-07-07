@@ -238,10 +238,12 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     }, completion: { (Bool) -> Void in
                         self.delay(0.2, closure: { () -> () in
                             let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                            let navVC : UINavigationController =  UINavigationController(rootViewController: homeVC)
+                            navVC.navigationBar.barStyle = UIBarStyle.BlackTranslucent
                             self.definesPresentationContext = true
                             homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
                             homeVC.transitioningDelegate = self
-                            self.presentViewController(homeVC, animated: false) { () -> Void in
+                            self.presentViewController(navVC, animated: false) { () -> Void in
                                 //
                             }
                         })
@@ -281,10 +283,12 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     self.card.center.y = self.card_origin_y + 110
                 }, completion: { (Bool) -> Void in
                     let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+                    let navVC: UINavigationController = UINavigationController(rootViewController: homeVC)
+                    navVC.navigationBar.barStyle = UIBarStyle.BlackTranslucent
                     self.definesPresentationContext = true
                     homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
                     homeVC.transitioningDelegate = self
-                    self.presentViewController(homeVC, animated: false) { () -> Void in
+                    self.presentViewController(navVC, animated: false) { () -> Void in
                         //
                     }
                 })
