@@ -226,6 +226,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     func didTapSave(sender:UIButton){
 
         var note = PFObject(className: "Note")
+        note.ACL = PFACL(user: PFUser.currentUser()!)
         note["text"] = self.textView_compose.text
         note["user"] = PFUser.currentUser()
 

@@ -231,6 +231,7 @@ class EditViewController: UIViewController {
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
             if error == nil && note != nil {
+                note!.ACL = PFACL(user: PFUser.currentUser()!)
                 note!["text"] = self.textView_compose.text
                 note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                     println("saved issue")
