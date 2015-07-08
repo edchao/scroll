@@ -96,7 +96,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         // TABLE SETUP
         
-        table_home.frame = CGRectMake(0, 20, screenSize.width, screenSize.height-20);
+        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
         table_home.rowHeight = 100
         table_home.delegate = self
         table_home.dataSource = self
