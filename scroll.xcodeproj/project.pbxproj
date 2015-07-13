@@ -13,6 +13,8 @@
 		F39C74191B45E4F000E12470 /* PTSerif.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F39C74181B45E4F000E12470 /* PTSerif.ttc */; };
 		F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */; };
 		F3B941701B48833D00287B20 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9416F1B48833D00287B20 /* AuthViewController.swift */; };
+		F3BA3E671B500F4C00E1D172 /* StacksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BA3E661B500F4C00E1D172 /* StacksViewController.swift */; };
+		F3BA3E991B53287500E1D172 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BA3E981B53287500E1D172 /* NavigationViewController.swift */; };
 		F3C3AB801B3F4D7E0069100C /* empty.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C3AB7F1B3F4D7E0069100C /* empty.m */; };
 		F3E2B0A41B3FC0C800CC7B45 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3E2B0A31B3FC0C800CC7B45 /* keys.plist */; };
 		F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */; };
@@ -45,6 +47,8 @@
 		F39C74181B45E4F000E12470 /* PTSerif.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSerif.ttc; sourceTree = "<group>"; };
 		F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
 		F3B9416F1B48833D00287B20 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		F3BA3E661B500F4C00E1D172 /* StacksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StacksViewController.swift; sourceTree = "<group>"; };
+		F3BA3E981B53287500E1D172 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		F3C3AB7E1B3F4D7D0069100C /* scroll-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "scroll-Bridging-Header.h"; sourceTree = "<group>"; };
 		F3C3AB7F1B3F4D7E0069100C /* empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = empty.m; sourceTree = "<group>"; };
 		F3E2B0A31B3FC0C800CC7B45 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			children = (
 				F3F6FDB21B360BB700CAACA6 /* AppDelegate.swift */,
 				F3B9416F1B48833D00287B20 /* AuthViewController.swift */,
+				F3BA3E981B53287500E1D172 /* NavigationViewController.swift */,
+				F3BA3E661B500F4C00E1D172 /* StacksViewController.swift */,
 				F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */,
 				F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */,
 				F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */,
@@ -339,6 +345,8 @@
 				F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */,
 				F3B941701B48833D00287B20 /* AuthViewController.swift in Sources */,
 				F3F6FDD51B360D6000CAACA6 /* HomeViewController.swift in Sources */,
+				F3BA3E991B53287500E1D172 /* NavigationViewController.swift in Sources */,
+				F3BA3E671B500F4C00E1D172 /* StacksViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

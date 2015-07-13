@@ -63,8 +63,9 @@ extension UIFont {
 
 let screenSize : CGRect = UIScreen.mainScreen().bounds
 
-class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ComposeDelegate, ActionSheetDelegate, EditDelegate {
+class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ComposeDelegate, ActionSheetDelegate, EditDelegate, UINavigationControllerDelegate {
 
+    
     // CLASS VARS
     
     var corner_left: UIImageView!
@@ -89,7 +90,12 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        self.title = "Stack"
+        
+        let logo = UIImage(named: "logomark")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        
         // SETUP VIEW
         view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
         
@@ -309,17 +315,17 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     // TABLE METHODS
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if table_home.contentOffset.y > 0 {
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                self.stroke_status.alpha = 1
-            })
-        }else{
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                self.stroke_status.alpha = 0
-            })
-        }
-    }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        if table_home.contentOffset.y > 0 {
+//            UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                self.stroke_status.alpha = 1
+//            })
+//        }else{
+//            UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                self.stroke_status.alpha = 0
+//            })
+//        }
+//    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;

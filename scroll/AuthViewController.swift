@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     
     
     // CLASS VARS
@@ -31,9 +31,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var btn_login: UIButton!
     var btn_create: UIButton!
     
-//    var textType : EnumerateSequence! {
-//        NameFieldTag = 0,
-//    }
 
     var card_origin_y : CGFloat! = 300
 
@@ -291,15 +288,16 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     func presentModalHome (sender:AnyObject) {
         let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-        let navVC : UINavigationController =  UINavigationController(rootViewController: homeVC)
-        navVC.navigationBar.tintColor = UIColor.neutralColor(alpha: 1.0)
+        let stacksVC: StacksViewController = StacksViewController(nibName:nil, bundle: nil)
+        let navVC : NavigationViewController =  NavigationViewController(rootViewController: stacksVC)
+        navVC.navigationBar.backItem?.hidesBackButton = false
+        navVC.navigationBar.tintColor = UIColor.primaryAccent(alpha: 1.0)
         navVC.navigationBar.translucent = true
         navVC.navigationBar.alpha = 0.5
+        navVC.transitioningDelegate = self
         self.definesPresentationContext = true
-        homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-        homeVC.transitioningDelegate = self
         self.presentViewController(navVC, animated: false) { () -> Void in
-            //
+            navVC.pushViewController(homeVC, animated: false)
         }
     }
     

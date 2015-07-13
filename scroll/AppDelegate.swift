@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        
+
+        
         if let path = NSBundle.mainBundle().pathForResource("keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
@@ -33,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if let window = window {
+            UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont.primaryFont()], forState: UIControlState.Normal)
             window.backgroundColor = UIColor.whiteColor()
             window.rootViewController = AuthViewController()
             window.makeKeyAndVisible()
