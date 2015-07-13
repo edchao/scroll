@@ -12,10 +12,18 @@ class StacksViewController: UIViewController, UINavigationControllerDelegate {
 
     var btn_stacks : UIButton!
     var stroke_stacks : UIView!
+    var chevron : UIImageView!
     
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
         self.title = "Stacks"
 
+        // SETUP VIEW
+        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        
+        
         // COMPOSE
         
         btn_stacks = UIButton(frame: CGRect(x: 0, y: 64, width: screenSize.width, height: 100))
@@ -35,11 +43,12 @@ class StacksViewController: UIViewController, UINavigationControllerDelegate {
         btn_stacks.addSubview(stroke_stacks)
 
         
-        // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        // CHEVRON
         
-        
-        super.viewDidLoad()
+        chevron = UIImageView(image: UIImage(named: "chevron"))
+        chevron.frame = CGRect(x: screenSize.width - 28, y: 44, width: 8.0, height: 13.0)
+        btn_stacks.addSubview(chevron)
+   
         
 
         // Do any additional setup after loading the view.

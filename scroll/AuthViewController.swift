@@ -290,10 +290,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
         let stacksVC: StacksViewController = StacksViewController(nibName:nil, bundle: nil)
         let navVC : NavigationViewController =  NavigationViewController(rootViewController: stacksVC)
-        navVC.navigationBar.backItem?.hidesBackButton = false
-        navVC.navigationBar.tintColor = UIColor.primaryAccent(alpha: 1.0)
-        navVC.navigationBar.translucent = true
-        navVC.navigationBar.alpha = 0.5
         navVC.transitioningDelegate = self
         self.definesPresentationContext = true
         self.presentViewController(navVC, animated: false) { () -> Void in
