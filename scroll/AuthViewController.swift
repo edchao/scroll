@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     
     
     // CLASS VARS
@@ -31,9 +31,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var btn_login: UIButton!
     var btn_create: UIButton!
     
-//    var textType : EnumerateSequence! {
-//        NameFieldTag = 0,
-//    }
 
     var card_origin_y : CGFloat! = 300
 
@@ -237,13 +234,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     self.card.center.y = self.card_origin_y + 110
                     }, completion: { (Bool) -> Void in
                         self.delay(0.2, closure: { () -> () in
-                            let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-                            self.definesPresentationContext = true
-                            homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-                            homeVC.transitioningDelegate = self
-                            self.presentViewController(homeVC, animated: false) { () -> Void in
-                                //
-                            }
+                            self.presentModalHome(self)
                         })
                 })
                 
@@ -280,13 +271,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                 UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                     self.card.center.y = self.card_origin_y + 110
                 }, completion: { (Bool) -> Void in
-                    let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-                    self.definesPresentationContext = true
-                    homeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
-                    homeVC.transitioningDelegate = self
-                    self.presentViewController(homeVC, animated: false) { () -> Void in
-                        //
-                    }
+                    self.presentModalHome(self)
                 })
                 
 
@@ -298,6 +283,19 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
+    
+    // PRESENT MODAL HOME
+    
+    func presentModalHome (sender:AnyObject) {
+        let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+        let stacksVC: StacksViewController = StacksViewController(nibName:nil, bundle: nil)
+        let navVC : NavigationViewController =  NavigationViewController(rootViewController: stacksVC)
+        navVC.transitioningDelegate = self
+        self.definesPresentationContext = true
+        self.presentViewController(navVC, animated: false) { () -> Void in
+            navVC.pushViewController(homeVC, animated: false)
+        }
+    }
     
     // DELAY
     
