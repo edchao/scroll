@@ -13,8 +13,6 @@ import UIKit
 class HomeTableViewCell: UITableViewCell, UITextViewDelegate {
     
     var label_text : UILabel! = UILabel()
-    var textView_compose : UITextView = UITextView()
-    var textView_size : CGSize! = CGSize()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
