@@ -13,6 +13,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var btn_stacks : UIButton!
     var stroke_stacks : UIView!
     var chevron : UIImageView!
+    var table_stacks: UITableView! = UITableView()
     
     override func viewDidLoad() {
         
@@ -23,11 +24,24 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // SETUP VIEW
         view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
         
-        let tableView = UITableView(frame: self.view.bounds)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .None
-        self.view.addSubview(tableView)
+        
+        // SETUP TABLE
+        
+        table_stacks.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+        table_stacks.rowHeight = 100
+        table_stacks.delegate = self
+        table_stacks.dataSource = self
+        table_stacks.registerClass(StacksTableViewCell.self, forCellReuseIdentifier: "cell")
+        table_stacks.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
+        table_stacks.separatorColor = UIColor.strokeColor(alpha: 1)
+        table_stacks.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        table_stacks.tableHeaderView = nil
+        table_stacks.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(table_stacks)
+        table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
+        self.table_stacks.rowHeight = UITableViewAutomaticDimension
+
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,41 +59,26 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension;
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        // EW REFACTOR ME
-        // XXX TODO
-        let cell: AnyObject? = tableView.dequeueReusableCellWithIdentifier("StacksCell")
-        if let cell = cell as? UITableViewCell {
-            return cell
-        } else {
-            let cell = UITableViewCell(frame: CGRect(x: 0, y: 64, width: screenSize.width, height: 100))
-            cell.textLabel?.text = "Stack"
-            //           cell.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-            //            cell.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0)
-            cell.backgroundColor = UIColor.clearColor()
-            cell.textLabel?.font = UIFont.tertiaryFont()
-            cell.textLabel?.textColor = UIColor.primaryColor(alpha: 1.0)
-            //            cell.setTitleColor(UIColor.primaryColor(alpha: 1.0), forState: UIControlState.Normal)
-            //           cell.addSubview(btn_stacks)
-            
-            // STROKE COMPOSE
-            
-            stroke_stacks = UIView(frame: CGRect(x: 20, y: 100, width: screenSize.width - 40, height:1))
-            stroke_stacks.backgroundColor = UIColor.strokeColor(alpha: 1.0)
-            cell.addSubview(stroke_stacks)
-            
-            
-            // CHEVRON
-            
-            chevron = UIImageView(image: UIImage(named: "chevron"))
-            chevron.frame = CGRect(x: screenSize.width - 28, y: 44, width: 8.0, height: 13.0)
-            cell.addSubview(chevron)
-            return cell
-        }
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StacksTableViewCell
+        cell.label_text.text = "Stack"
+        cell.accessoryType = .DisclosureIndicator
+        cell.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        
+
+        return cell
+
     }
 }
