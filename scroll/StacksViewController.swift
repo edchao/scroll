@@ -8,12 +8,15 @@
 
 import UIKit
 
-class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
+class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIAlertViewDelegate {
     
     var btn_stacks : UIButton!
+    var btn_add : UIBarButtonItem!
+
     var stroke_stacks : UIView!
     var chevron : UIImageView!
     var table_stacks: UITableView! = UITableView()
+    
     
     override func viewDidLoad() {
         
@@ -41,13 +44,43 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
         self.table_stacks.rowHeight = UITableViewAutomaticDimension
 
+        // BUTTONS
         
+        btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
+        self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
+        
+        
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func didTapAdd(sender:UIBarButtonItem){
+
+        let alert = UIAlertView(
+            title: "New Short Stack",
+            message: "Enter a name for this Short Stack",
+            delegate: self,
+            cancelButtonTitle: "Cancel",
+            otherButtonTitles: "Save"
+        )
+        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        let textField = alert.textFieldAtIndex(0)
+        alert.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == alertView.cancelButtonIndex {
+            println ("cancelled")
+        }
+        else{
+            println(alertView.textFieldAtIndex(0)!.text)
+        }
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

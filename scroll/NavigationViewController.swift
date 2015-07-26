@@ -27,6 +27,11 @@ class NavigationViewController: UINavigationController {
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
         }
         
+        
+
+        
+        
+        
         // CORNER MASKS
         corner_left = UIImageView(image: UIImage(named: "corner_left"))
         corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
@@ -44,5 +49,7 @@ class NavigationViewController: UINavigationController {
     }
     
 
-
+    func didTapAdd(sender:UIButton){
+        //
+    }
 }
