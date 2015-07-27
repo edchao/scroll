@@ -33,7 +33,10 @@ extension UIColor {
     class func strokeColor(alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(red: 226/255, green: 226/255, blue: 226/255, alpha: alpha)
     }
-}
+    
+    class func headerColor(alpha: CGFloat = 1.0) -> UIColor {
+        return UIColor(red: 237/255, green: 241/255, blue: 240/255, alpha: alpha)
+    }}
 
 extension UIFont {
     
@@ -43,6 +46,10 @@ extension UIFont {
     
     class func primaryFontLarge() -> UIFont {
         return UIFont(name: "SanFranciscoDisplay-Regular", size: 20.0)!
+    }
+    
+    class func primaryFontSmall() -> UIFont {
+        return UIFont(name: "SanFranciscoDisplay-Regular", size: 12.0)!
     }
     
     class func secondaryFont() -> UIFont {

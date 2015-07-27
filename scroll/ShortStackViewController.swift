@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ShortStackViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ActionSheetDelegate, EditDelegate {
+class ShortStackViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, ActionSheetDelegate, EditDelegate, ComposeDelegate {
 
     // CLASS VARS
     
@@ -83,6 +83,20 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
             println("reloaded table")
         }
         
+    }
+    
+    // TRANSITION
+    
+    func didTapCompose(Sender: UIButton!) {
+        let composeVC: ComposeViewController = ComposeViewController(nibName: nil, bundle: nil)
+        composeVC.delegate = self
+        self.definesPresentationContext = true
+        composeVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        composeVC.transitioningDelegate = self
+        composeVC.stackObject = self.stackObject
+        self.presentViewController(composeVC, animated: false) { () -> Void in
+            //
+        }
     }
     
     // QUERIES

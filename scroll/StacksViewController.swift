@@ -44,8 +44,8 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.registerClass(StacksTableViewCell.self, forCellReuseIdentifier: "cell")
         table_stacks.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
         table_stacks.separatorColor = UIColor.strokeColor(alpha: 1)
-        table_stacks.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-        table_stacks.tableHeaderView = nil
+        table_stacks.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        table_stacks.tableHeaderView = UIView(frame: CGRectMake(0, 0, screenSize.width, 11))
         table_stacks.backgroundColor = UIColor.clearColor()
         self.view.addSubview(table_stacks)
         table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
@@ -79,6 +79,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // VIEW PAINTING
     
     override func viewWillAppear(animated: Bool) {
+        table_stacks.tableHeaderView!.frame = CGRectMake(0, 0, screenSize.width, 11)
         getStacks { () -> Void in
             //
         }
@@ -166,6 +167,44 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 2
     }
     
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return nil
+        }else{
+            return "SHORT STACKS"
+        }
+    }
+
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }else{
+            return 22
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        }else{
+            let view : UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 22))
+            let label : UILabel = UILabel(frame: CGRectMake(20, 0, tableView.frame.size.width, 22))
+            let strokeTop : UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+            let strokeBot : UIView = UIView(frame: CGRect(x: 0, y: 21, width: tableView.frame.size.width, height: 1))
+            strokeBot.backgroundColor = UIColor.strokeColor(alpha: 1.0)
+            strokeTop.backgroundColor = UIColor.strokeColor(alpha: 1.0)
+            label.font = UIFont.primaryFontSmall()
+            label.textColor = UIColor.primaryColor(alpha: 0.7)
+            label.text = "SHORT STACKS"
+            view.addSubview(label)
+            view.addSubview(strokeTop)
+            view.addSubview(strokeBot)
+            view.backgroundColor = UIColor.headerColor(alpha: 1.0)
+            return view
+        }
+    
+    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;

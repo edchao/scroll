@@ -40,6 +40,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     var delegate: ComposeDelegate?
 
+    
+    // PARSE VARIABLES
+    var stackObject : PFObject!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -231,13 +235,36 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         note["user"] = PFUser.currentUser()
 
         note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("saved issue")
-            self.textView_compose.text = ""
-            self.delegate?.reloadHomeTable(self)
-            self.textView_compose.endEditing(true)
-            self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                //
-            })
+            
+            if (success) {
+                println("saved issue")
+                self.textView_compose.text = ""
+                self.delegate?.reloadHomeTable(self)
+                self.textView_compose.endEditing(true)
+                if self.stackObject != nil {
+                    var relation = note.relationForKey("stacks")
+                    relation.addObject(self.stackObject)
+                    note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                        println("saved to short stack")
+                        self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                            //
+                        })
+                    }
+                    
+                }else{
+                    println("no stackobject")
+                    note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                        println("saved to regular stack")
+                        self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                            //
+                        })
+                    }
+                }
+
+            } else {
+                println(error!.description)
+            }
+
         }
         
     }
