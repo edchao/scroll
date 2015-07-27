@@ -11,6 +11,7 @@
 		F32A81661B49EAD000747A07 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A81651B49EAD000747A07 /* EditViewController.swift */; };
 		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
 		F37EA8E71B5B221900E8DA1D /* StacksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37EA8E61B5B221900E8DA1D /* StacksTableViewCell.swift */; };
+		F39B03B41B6592620071DA7D /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39B03B31B6592620071DA7D /* SelectViewController.swift */; };
 		F39C74191B45E4F000E12470 /* PTSerif.ttc in Resources */ = {isa = PBXBuildFile; fileRef = F39C74181B45E4F000E12470 /* PTSerif.ttc */; };
 		F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */; };
 		F3B941701B48833D00287B20 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B9416F1B48833D00287B20 /* AuthViewController.swift */; };
@@ -46,6 +47,7 @@
 		F32A81651B49EAD000747A07 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		F37EA8E61B5B221900E8DA1D /* StacksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StacksTableViewCell.swift; sourceTree = "<group>"; };
+		F39B03B31B6592620071DA7D /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		F39C74181B45E4F000E12470 /* PTSerif.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTSerif.ttc; sourceTree = "<group>"; };
 		F3B859CD1B49952E0085712C /* ActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
 		F3B9416F1B48833D00287B20 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				F3B9416F1B48833D00287B20 /* AuthViewController.swift */,
 				F3BA3E981B53287500E1D172 /* NavigationViewController.swift */,
 				F3BA3E661B500F4C00E1D172 /* StacksViewController.swift */,
+				F39B03B31B6592620071DA7D /* SelectViewController.swift */,
 				F3F6FDD41B360D6000CAACA6 /* HomeViewController.swift */,
 				F3F6FDD21B360C4B00CAACA6 /* ComposeViewController.swift */,
 				F32A81651B49EAD000747A07 /* EditViewController.swift */,
@@ -360,6 +363,7 @@
 				F3F6FDD31B360C4B00CAACA6 /* ComposeViewController.swift in Sources */,
 				F3F6FDB31B360BB700CAACA6 /* AppDelegate.swift in Sources */,
 				F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */,
+				F39B03B41B6592620071DA7D /* SelectViewController.swift in Sources */,
 				F3C3AB801B3F4D7E0069100C /* empty.m in Sources */,
 				F37EA8E71B5B221900E8DA1D /* StacksTableViewCell.swift in Sources */,
 				F3B859CE1B49952E0085712C /* ActionSheetViewController.swift in Sources */,

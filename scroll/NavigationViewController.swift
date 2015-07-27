@@ -20,7 +20,7 @@ class NavigationViewController: UINavigationController {
         UINavigationBar.appearance().tintColor = UIColor.primaryAccent(alpha: 1.0)
         UINavigationBar.appearance().translucent = true
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "bg_nav"), forBarMetrics: UIBarMetrics.Default)
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "bg_nav"), forBarMetrics: UIBarMetrics.Default)
 
         
         if let font = UIFont(name: "SanFranciscoDisplay-Medium", size: 17) {

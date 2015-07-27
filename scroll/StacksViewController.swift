@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIAlertViewDelegate {
     
@@ -16,6 +17,8 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var stroke_stacks : UIView!
     var chevron : UIImageView!
     var table_stacks: UITableView! = UITableView()
+    
+    var alert : UIAlertView!
     
     
     override func viewDidLoad() {
@@ -49,6 +52,17 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
         self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
         
+        // ALERT
+        
+        
+        alert = UIAlertView(
+            title: "New Short Stack",
+            message: "Enter a name for this Short Stack",
+            delegate: self,
+            cancelButtonTitle: "Cancel",
+            otherButtonTitles: "Save"
+        )
+
         
 
     }
@@ -59,16 +73,8 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func didTapAdd(sender:UIBarButtonItem){
-
-        let alert = UIAlertView(
-            title: "New Short Stack",
-            message: "Enter a name for this Short Stack",
-            delegate: self,
-            cancelButtonTitle: "Cancel",
-            otherButtonTitles: "Save"
-        )
         alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
-        let textField = alert.textFieldAtIndex(0)
+        alert.textFieldAtIndex(0)?.placeholder = "Trip to Taipei"
         alert.show()
     }
     
@@ -77,10 +83,26 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
             println ("cancelled")
         }
         else{
-            println(alertView.textFieldAtIndex(0)!.text)
+            var stackName = alertView.textFieldAtIndex(0)!.text
+            self.addStack(stackName)
         }
     }
     
+    
+    func addStack(stackName : String) {
+        println(stackName)
+        
+        var shortStack = PFObject(className: "Stack")
+        shortStack.ACL = PFACL(user: PFUser.currentUser()!)
+        shortStack["text"] = stackName
+        shortStack["user"] = PFUser.currentUser()
+        
+        shortStack.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("saved Stack")
+        }
+
+        
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -13,10 +13,11 @@ import Bolts
 protocol ActionSheetDelegate {
     func deleteNote(sender: ActionSheetViewController, indexPath: NSIndexPath)
     func editNote(sender: ActionSheetViewController, indexPath: NSIndexPath)
+    func presentSelectModal(sender: ActionSheetViewController, indexPath: NSIndexPath)
 }
 
 
-class ActionSheetViewController: UIViewController {
+class ActionSheetViewController: UIViewController, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
 
     // CLASS VARS
     
@@ -28,6 +29,7 @@ class ActionSheetViewController: UIViewController {
     var card : UIView!
     var stroke_card : UIView!
     var btn_edit: UIButton!
+    var btn_shortStack : UIButton!
     var btn_delete: UIButton!
     var btn_cancel: UIButton!
     var card_origin_y : CGFloat! = 300
@@ -55,7 +57,7 @@ class ActionSheetViewController: UIViewController {
         
         // CARD
         
-        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 180))
+        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 240))
         card_origin_y = view.frame.height + (card.frame.height / 2)
         card.center.y = card_origin_y
         card.backgroundColor = UIColor.whiteColor()
@@ -73,22 +75,30 @@ class ActionSheetViewController: UIViewController {
         // BUTTONS
         
         btn_edit = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
-        btn_edit.setTitle("Edit", forState: UIControlState.Normal)
+        btn_edit.setTitle("Edit Note", forState: UIControlState.Normal)
         btn_edit.titleLabel!.font = UIFont.secondaryFontLarge()
         btn_edit.backgroundColor = UIColor.neutralColor(alpha: 0)
         btn_edit.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
         btn_edit.addTarget(self, action: "didTapEdit:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_edit)
+ 
+        btn_shortStack = UIButton(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 60))
+        btn_shortStack.setTitle("Add to Short Stack", forState: UIControlState.Normal)
+        btn_shortStack.titleLabel!.font = UIFont.secondaryFontLarge()
+        btn_shortStack.backgroundColor = UIColor.neutralColor(alpha: 0)
+        btn_shortStack.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_shortStack.addTarget(self, action: "didTapShortStack:", forControlEvents: .TouchUpInside)
+        card.addSubview(btn_shortStack)
         
-        btn_delete = UIButton(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 60))
-        btn_delete.setTitle("Delete", forState: UIControlState.Normal)
+        btn_delete = UIButton(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 60))
+        btn_delete.setTitle("Delete Note", forState: UIControlState.Normal)
         btn_delete.titleLabel!.font = UIFont.secondaryFontLarge()
         btn_delete.backgroundColor = UIColor.neutralColor(alpha: 0)
         btn_delete.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
         btn_delete.addTarget(self, action: "didTapDelete:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_delete)
         
-        btn_cancel = UIButton(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 60))
+        btn_cancel = UIButton(frame: CGRect(x: 0, y: 180, width: view.frame.width, height: 60))
         btn_cancel.setTitle("Cancel", forState: UIControlState.Normal)
         btn_cancel.titleLabel!.font = UIFont.secondaryFontLarge()
         btn_cancel.backgroundColor = UIColor.neutralColor(alpha: 0)
@@ -125,6 +135,20 @@ class ActionSheetViewController: UIViewController {
         }
     }
     
+    
+    func didTapShortStack(sender:UIButton) {
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            self.card.layer.shadowOpacity = 0
+            self.overlay.alpha = 0
+            self.card.center.y = self.card_origin_y
+            }) { (Bool) -> Void in
+                self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                    delegate?.presentSelectModal(self, indexPath: self.indexPath)
+                })
+        }
+    }
+    
+
     
     func didTapDelete(sender:UIButton) {
         delegate?.deleteNote(self, indexPath: self.indexPath)

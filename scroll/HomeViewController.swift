@@ -270,6 +270,27 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
 
 
     }
+    
+    
+    // PRESENT MODAL HOME
+    
+    func presentSelectModal (sender:ActionSheetViewController, indexPath: NSIndexPath) {
+        
+        let selectVC: SelectViewController = SelectViewController(nibName: nil, bundle: nil)
+        self.definesPresentationContext = true
+        selectVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        selectVC.transitioningDelegate = self
+//        selectVC.delegate = self
+        selectVC.indexPath = indexPath
+        selectVC.noteId = self.notes[indexPath.row].objectId
+        let selectNavVC : NavigationViewController =  NavigationViewController(rootViewController: selectVC)
+
+        self.presentViewController(selectNavVC, animated: true) { () -> Void in
+            //
+        }
+
+        
+    }
 
     // QUERIES
     
