@@ -140,21 +140,21 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         
         // CORNER MASKS
-        corner_left = UIImageView(image: UIImage(named: "corner_left"))
-        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
-        view.addSubview(corner_left)
-        
-        corner_right = UIImageView(image: UIImage(named: "corner_right"))
-        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
-        view.addSubview(corner_right)
-        
-        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
-        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_left)
-        
-        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
-        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_right)
+//        corner_left = UIImageView(image: UIImage(named: "corner_left"))
+//        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
+//        view.addSubview(corner_left)
+//        
+//        corner_right = UIImageView(image: UIImage(named: "corner_right"))
+//        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
+//        view.addSubview(corner_right)
+//        
+//        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
+//        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
+//        view.addSubview(corner_bottom_left)
+//        
+//        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
+//        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
+//        view.addSubview(corner_bottom_right)
         
         // MISC INIT
         

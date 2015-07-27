@@ -20,6 +20,10 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var alert : UIAlertView!
     
+    // PARSE VARIABLES
+    var stacks : [PFObject]! = []
+    var stackId : String! = "000"
+    
     
     override func viewDidLoad() {
         
@@ -72,6 +76,31 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    // VIEW PAINTING
+    
+    override func viewWillAppear(animated: Bool) {
+        getStacks { () -> Void in
+            //
+        }
+    }
+    
+    // QUERIES
+    
+    func getStacks(completion:() -> Void){
+        var query = PFQuery(className: "Stack")
+        query.whereKey("user", equalTo: PFUser.currentUser()!)
+        query.addAscendingOrder("createdAt")
+        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+            UIView.animateWithDuration(0, animations: { () -> Void in
+                self.stacks = objects as! [PFObject]?
+                self.table_stacks.reloadData()
+                }, completion: { (Bool) -> Void in
+                    //
+            })
+            
+        }
+    }
+    
     func didTapAdd(sender:UIBarButtonItem){
         alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
         alert.textFieldAtIndex(0)?.placeholder = "Trip to Taipei"
@@ -99,22 +128,45 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         shortStack.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             println("saved Stack")
+            self.getStacks({ () -> Void in
+                //
+            })
         }
 
         
     }
     
+    // TABLEVIEW METHODS
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
-        self.navigationController?.pushViewController(homeVC, animated: true)
+        if indexPath.section == 0 {
+            let homeVC: HomeViewController = HomeViewController(nibName: nil, bundle: nil)
+            self.navigationController?.pushViewController(homeVC, animated: true)
+        }else{
+            let shortVC: ShortStackViewController = ShortStackViewController(nibName: nil, bundle: nil)
+            shortVC.title = self.stacks[indexPath.row]["text"] as! String!
+            shortVC.stackObject = self.stacks[indexPath.row]
+            self.navigationController?.pushViewController(shortVC, animated: true)
+        }
+
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        }
+        else {
+            return self.stacks.count
+        }
     }
     
 
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
     }
@@ -125,15 +177,25 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StacksTableViewCell
-        cell.label_text.text = "Stack"
-        cell.accessoryType = .DisclosureIndicator
-        cell.backgroundColor = UIColor.neutralColor(alpha: 1.0)
-        
-
+        if indexPath.section == 0 {
+            cell.label_text.text = "Stack"
+            cell.accessoryType = .DisclosureIndicator
+            cell.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        }else{
+            var stack = self.stacks[indexPath.row]
+            cell.label_text.text = stack["text"] as! String!
+            cell.accessoryType = .DisclosureIndicator
+            cell.backgroundColor = UIColor.clearColor()
+            cell.sizeToFit()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            
+            return cell
+        }
         return cell
+
+        
 
     }
 }
