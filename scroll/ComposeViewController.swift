@@ -20,10 +20,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     // CLASS VARS
     
-    var corner_left: UIImageView!
-    var corner_right: UIImageView!
-    var corner_bottom_left: UIImageView!
-    var corner_bottom_right: UIImageView!
     var overlay: UIView!
     var card : UIView!
     var stroke_card : UIView!
@@ -122,23 +118,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         btn_save.setTitle("Save", forState: .Normal)
         btn_save.addTarget(self, action: "didTapSave:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_save)
-        
-        // CORNER MASKS
-        corner_left = UIImageView(image: UIImage(named: "corner_left"))
-        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
-        view.addSubview(corner_left)
-        
-        corner_right = UIImageView(image: UIImage(named: "corner_right"))
-        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
-        view.addSubview(corner_right)
-        
-        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
-        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_left)
-        
-        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
-        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_right)
         
         
         // KEYBOARD

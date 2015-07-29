@@ -14,11 +14,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     // CLASS VARS
     
-    var corner_left: UIImageView!
-    var corner_right: UIImageView!
-    var corner_bottom_left: UIImageView!
-    var corner_bottom_right: UIImageView!
-    
     var logotype: UIImageView!
     var label_punchline: UILabel!
     
@@ -28,7 +23,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var stroke_password : UIView!
     var input_email : UITextField!
     var input_pw : UITextField!
-//    var btn_login: UIButton!
     var btn_go: UIButton!
     var btn_toggle: UIButton!
     
@@ -117,18 +111,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
         view.addSubview(btn_toggle)
         
-//        btn_login = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
-//        btn_login.center.y = card.frame.height - 30
-//        btn_login.backgroundColor = UIColor.neutralColor(alpha: 0)
-//        btn_login.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
-//        btn_login.layer.cornerRadius = 4
-//        btn_login.layer.borderWidth = 1
-//        btn_login.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
-//        btn_login.titleLabel!.font = UIFont.secondaryFontLarge()
-//        btn_login.setTitle("Login", forState: .Normal)
-//        btn_login.addTarget(self, action: "didTapLogin:", forControlEvents: .TouchUpInside)
-//        card.addSubview(btn_login)
-        
         btn_go = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
         btn_go.center.y = card.frame.height - 30
         btn_go.backgroundColor = UIColor.neutralColor(alpha: 0)
@@ -141,23 +123,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         btn_go.addTarget(self, action: "didTapGo:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_go)
         
-        
-        // CORNER MASKS
-        corner_left = UIImageView(image: UIImage(named: "corner_left"))
-        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
-        view.addSubview(corner_left)
-        
-        corner_right = UIImageView(image: UIImage(named: "corner_right"))
-        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
-        view.addSubview(corner_right)
-        
-        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
-        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_left)
-        
-        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
-        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
-        view.addSubview(corner_bottom_right)
         
         
         // KEYBOARD
@@ -297,14 +262,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
     }
 
-    
-    
-    // SIGN IN AND SIGN UP BUTTON FUNCTIONALITY
-    
-//    func didTapLogin(sender:AnyObject){
-//        
-//
-//    }
     
     
     // PRESENT MODAL HOME

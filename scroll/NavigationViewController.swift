@@ -9,9 +9,6 @@
 import UIKit
 
 class NavigationViewController: UINavigationController {
-
-    var corner_left: UIImageView!
-    var corner_right: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +25,6 @@ class NavigationViewController: UINavigationController {
         }
         
         
-
-        
-        
-        
-        // CORNER MASKS
-//        corner_left = UIImageView(image: UIImage(named: "corner_left"))
-//        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
-//        view.addSubview(corner_left)
-//        
-//        corner_right = UIImageView(image: UIImage(named: "corner_right"))
-//        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
-//        view.addSubview(corner_right)
 
 
     }

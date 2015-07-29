@@ -40,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.backgroundColor = UIColor.whiteColor()
             window.rootViewController = AuthViewController()
             window.makeKeyAndVisible()
+            window.layer.cornerRadius = 4.0
+            window.layer.masksToBounds = true
+            window.layer.opaque = false
         }
 
         return true

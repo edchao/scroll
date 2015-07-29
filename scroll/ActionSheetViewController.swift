@@ -21,10 +21,6 @@ class ActionSheetViewController: UIViewController, UIViewControllerTransitioning
 
     // CLASS VARS
     
-    var corner_left: UIImageView!
-    var corner_right: UIImageView!
-    var corner_bottom_left: UIImageView!
-    var corner_bottom_right: UIImageView!
     var overlay: UIView!
     var card : UIView!
     var stroke_card : UIView!

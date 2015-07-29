@@ -74,11 +74,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
 
     
     // CLASS VARS
-    
-    var corner_left: UIImageView!
-    var corner_right: UIImageView!
-    var corner_bottom_left: UIImageView!
-    var corner_bottom_right: UIImageView!
+
     var table_home : UITableView = UITableView()
     var contentContainer : UIView!
     var composeVC: ComposeViewController! = ComposeViewController()
@@ -108,7 +104,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         
         // TABLE SETUP
         
-        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height - 50);
         table_home.rowHeight = 100
         table_home.delegate = self
         table_home.dataSource = self
@@ -145,23 +141,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         btn_compose.addSubview(stroke_compose)
         
         
-        
-        // CORNER MASKS
-//        corner_left = UIImageView(image: UIImage(named: "corner_left"))
-//        corner_left.frame = CGRect(x: 0, y: 0, width: 6, height: 6)
-//        view.addSubview(corner_left)
-//        
-//        corner_right = UIImageView(image: UIImage(named: "corner_right"))
-//        corner_right.frame = CGRect(x: screenSize.width - 6, y: 0, width: 6, height: 6)
-//        view.addSubview(corner_right)
-//        
-//        corner_bottom_left = UIImageView(image: UIImage(named: "corner_bottom_left"))
-//        corner_bottom_left.frame = CGRect(x: 0, y: screenSize.height - 6, width: 6, height: 6)
-//        view.addSubview(corner_bottom_left)
-//        
-//        corner_bottom_right = UIImageView(image: UIImage(named: "corner_bottom_right"))
-//        corner_bottom_right.frame = CGRect(x: screenSize.width - 6, y: screenSize.height - 6, width: 6, height: 6)
-//        view.addSubview(corner_bottom_right)
+
         
         // MISC INIT
         
