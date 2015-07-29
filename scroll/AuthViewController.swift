@@ -105,7 +105,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         // BUTTONS
         
-        btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 20, width: 80, height: 30))
+        btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 30, width: 80, height: 30))
         btn_toggle.backgroundColor = UIColor.clearColor()
         btn_toggle.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
         btn_toggle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
