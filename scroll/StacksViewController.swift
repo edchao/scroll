@@ -48,8 +48,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.tableHeaderView = UIView(frame: CGRectMake(0, 0, screenSize.width, 11))
         table_stacks.backgroundColor = UIColor.clearColor()
         self.view.addSubview(table_stacks)
-        table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
-        self.table_stacks.rowHeight = UITableViewAutomaticDimension
+//        self.table_stacks.rowHeight = UITableViewAutomaticDimension
 
         // BUTTONS
         
@@ -207,11 +206,11 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension;
+        return 100 //UITableViewAutomaticDimension;
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 100 //UITableViewAutomaticDimension
     }
     
     

@@ -110,7 +110,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
                 self.table_home.reloadData()
-                }, completion: { (Bool) -> Void in
+            }, completion: { (Bool) -> Void in
                     completion()
             })
             
