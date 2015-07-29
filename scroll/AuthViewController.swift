@@ -28,8 +28,9 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var stroke_password : UIView!
     var input_email : UITextField!
     var input_pw : UITextField!
-    var btn_login: UIButton!
-    var btn_create: UIButton!
+//    var btn_login: UIButton!
+    var btn_go: UIButton!
+    var btn_toggle: UIButton!
     
 
     var card_origin_y : CGFloat! = 300
@@ -107,29 +108,38 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
 
         
         // BUTTONS
-        btn_login = UIButton(frame: CGRect(x: 20, y: 0, width: 44, height: 30))
-        btn_login.center.y = card.frame.height - 30
-        btn_login.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_login.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
-        btn_login.layer.cornerRadius = 4
-        btn_login.layer.borderWidth = 1
-        btn_login.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
-        btn_login.titleLabel!.font = UIFont.primaryFont()
-        btn_login.setTitle("Login", forState: .Normal)
-        btn_login.addTarget(self, action: "didTapLogin:", forControlEvents: .TouchUpInside)
-        card.addSubview(btn_login)
         
-        btn_create = UIButton(frame: CGRect(x: view.frame.width - 120 - 20, y: 30, width: 120, height: 30))
-        btn_create.center.y = card.frame.height - 30
-        btn_create.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_create.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
-        btn_create.layer.cornerRadius = 4
-        btn_create.layer.borderWidth = 1
-        btn_create.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
-        btn_create.titleLabel!.font = UIFont.primaryFont()
-        btn_create.setTitle("Create Account", forState: .Normal)
-        btn_create.addTarget(self, action: "didTapSignUp:", forControlEvents: .TouchUpInside)
-        card.addSubview(btn_create)
+        btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 20, width: 80, height: 30))
+        btn_toggle.backgroundColor = UIColor.whiteColor()
+        btn_toggle.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_toggle.setTitle("Login", forState: .Normal)
+        btn_toggle.setTitle("Sign up", forState: .Selected)
+        btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
+        view.addSubview(btn_toggle)
+        
+//        btn_login = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
+//        btn_login.center.y = card.frame.height - 30
+//        btn_login.backgroundColor = UIColor.neutralColor(alpha: 0)
+//        btn_login.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+//        btn_login.layer.cornerRadius = 4
+//        btn_login.layer.borderWidth = 1
+//        btn_login.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
+//        btn_login.titleLabel!.font = UIFont.secondaryFontLarge()
+//        btn_login.setTitle("Login", forState: .Normal)
+//        btn_login.addTarget(self, action: "didTapLogin:", forControlEvents: .TouchUpInside)
+//        card.addSubview(btn_login)
+        
+        btn_go = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
+        btn_go.center.y = card.frame.height - 30
+        btn_go.backgroundColor = UIColor.neutralColor(alpha: 0)
+        btn_go.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_go.layer.cornerRadius = 4
+        btn_go.layer.borderWidth = 1
+        btn_go.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
+        btn_go.titleLabel!.font = UIFont.secondaryFontLarge()
+        btn_go.setTitle("Sign up", forState: .Normal)
+        btn_go.addTarget(self, action: "didTapGo:", forControlEvents: .TouchUpInside)
+        card.addSubview(btn_go)
         
         
         // CORNER MASKS
@@ -214,43 +224,75 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
 
+    // TOGGLE
     
-    // SIGN UP
-    
-    func didTapSignUp(sender:AnyObject){
-        
-        var user = PFUser()
-        user.username = self.input_email.text.lowercaseString
-        user.password = self.input_pw.text
-        
-        user.signUpInBackgroundWithBlock { (success, error) -> Void in
-            if success {
-                println("successful sign up")
-                
-                self.input_email.endEditing(true)
-                self.input_pw.endEditing(true)
-                
-                UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                    self.card.center.y = self.card_origin_y + 110
-                    }, completion: { (Bool) -> Void in
-                        self.delay(0.2, closure: { () -> () in
-                            self.presentModalHome(self)
-                        })
-                })
-                
-
-
-                
-                
-
-
-                
-            }else{
-                var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
-                alertView.show()
-            }
+    func didToggle(sender:AnyObject){
+        if self.btn_toggle.selected {
+            self.btn_toggle.selected = false
+            self.btn_go.setTitle("Sign up", forState: .Normal)
+        }else{
+            self.btn_toggle.selected = true
+            self.btn_go.setTitle("Log in", forState: .Normal)
         }
+        
+    }
+    
+    
+    func didTapGo(sender:AnyObject){
+        
+        
+        // LOG IN
+        if self.btn_toggle.selected {
+            PFUser.logInWithUsernameInBackground(input_email.text.lowercaseString, password:input_pw.text) {
+                (user: PFUser?, error: NSError?) -> Void in
+                if user != nil {
+                    
+                    self.input_email.endEditing(true)
+                    self.input_pw.endEditing(true)
+                    
+                    UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.card.center.y = self.card_origin_y + 110
+                        }, completion: { (Bool) -> Void in
+                            self.presentModalHome(self)
+                    })
+                    
+                } else {
+                    var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    alertView.show()
+                }
+            }
 
+        // SIGN UP
+        }else{
+            var user = PFUser()
+            user.username = self.input_email.text.lowercaseString
+            user.password = self.input_pw.text
+            
+            user.signUpInBackgroundWithBlock { (success, error) -> Void in
+                if success {
+                    println("successful sign up")
+                    
+                    self.input_email.endEditing(true)
+                    self.input_pw.endEditing(true)
+                    
+                    UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.card.center.y = self.card_origin_y + 110
+                        }, completion: { (Bool) -> Void in
+                            self.delay(0.2, closure: { () -> () in
+                                self.presentModalHome(self)
+                            })
+                    })
+                    
+                }else{
+                    var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    alertView.show()
+                }
+            }
+            
+
+        }
+        
+        
 
         
     }
@@ -259,29 +301,10 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     // SIGN IN AND SIGN UP BUTTON FUNCTIONALITY
     
-    func didTapLogin(sender:AnyObject){
-        
-        PFUser.logInWithUsernameInBackground(input_email.text.lowercaseString, password:input_pw.text) {
-            (user: PFUser?, error: NSError?) -> Void in
-            if user != nil {
-                
-                self.input_email.endEditing(true)
-                self.input_pw.endEditing(true)
-                
-                UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                    self.card.center.y = self.card_origin_y + 110
-                }, completion: { (Bool) -> Void in
-                    self.presentModalHome(self)
-                })
-                
-
-
-            } else {
-                var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
-                alertView.show()
-            }
-        }
-    }
+//    func didTapLogin(sender:AnyObject){
+//        
+//
+//    }
     
     
     // PRESENT MODAL HOME
