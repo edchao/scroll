@@ -26,7 +26,9 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var btn_go: UIButton!
     var btn_toggle: UIButton!
     
-
+    
+    var kbSizeVal : CGFloat! = 300
+    var kbUp : Bool! = false
     var card_origin_y : CGFloat! = 300
 
     override func viewDidLoad() {
@@ -104,8 +106,9 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         // BUTTONS
         
         btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 20, width: 80, height: 30))
-        btn_toggle.backgroundColor = UIColor.whiteColor()
+        btn_toggle.backgroundColor = UIColor.clearColor()
         btn_toggle.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_toggle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
         btn_toggle.setTitle("Login", forState: .Normal)
         btn_toggle.setTitle("Sign up", forState: .Selected)
         btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
@@ -155,6 +158,8 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         var animationDuration = durationValue.doubleValue
         var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         var animationCurve = curveValue.integerValue
+        kbSizeVal = kbSize.height
+        kbUp = true
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
             
@@ -175,6 +180,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         var animationDuration = durationValue.doubleValue
         var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         var animationCurve = curveValue.integerValue
+        kbUp = false
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
             
@@ -191,13 +197,41 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
 
     // TOGGLE
     
+    func toggleAnimation(){
+        if self.kbUp == true {
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.card.center.y = self.card_origin_y + 160
+                }, completion: { (Bool) -> Void in
+                    UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.card.center.y = screenSize.height - self.kbSizeVal - self.card.frame.height/2
+                        }, completion: { (Bool) -> Void in
+                            //
+                    })
+            })
+
+        }else{
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.card.center.y = self.card_origin_y + 160
+                }, completion: { (Bool) -> Void in
+                    UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                        self.card.center.y = self.card_origin_y
+                        }, completion: { (Bool) -> Void in
+                            //
+                    })
+            })
+        }
+        
+    }
+    
     func didToggle(sender:AnyObject){
         if self.btn_toggle.selected {
             self.btn_toggle.selected = false
             self.btn_go.setTitle("Sign up", forState: .Normal)
+            toggleAnimation()
         }else{
             self.btn_toggle.selected = true
             self.btn_go.setTitle("Log in", forState: .Normal)
+            toggleAnimation()
         }
         
     }
