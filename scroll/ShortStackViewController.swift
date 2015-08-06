@@ -37,7 +37,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // TABLE SETUP
         
-        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height - 50);
         table_home.rowHeight = 100
         table_home.delegate = self
         table_home.dataSource = self
