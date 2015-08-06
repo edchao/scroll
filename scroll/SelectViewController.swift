@@ -11,10 +11,12 @@ import Parse
 
 
 
-class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
 
     var table_stacks: UITableView! = UITableView()
     var btn_cancel : UIBarButtonItem!
+    var alert : UIAlertView!
+    var btn_add : UIBarButtonItem!
 
     
     // PARSE VARIABLES
@@ -53,11 +55,24 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
         self.table_stacks.rowHeight = UITableViewAutomaticDimension
         
+        // ALERT
+        
+        
+        alert = UIAlertView(
+            title: "New Short Stack",
+            message: "Enter a name for this Short Stack",
+            delegate: self,
+            cancelButtonTitle: "Cancel",
+            otherButtonTitles: "Save"
+        )
+        
         // BUTTONS
         
         btn_cancel = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapCancel:")
         self.navigationController?.topViewController.navigationItem.leftBarButtonItem = btn_cancel
         
+        btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
+        self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
 
     }
 
@@ -98,6 +113,43 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
             
         }
+    }
+
+    
+    
+    func didTapAdd(sender:UIBarButtonItem){
+        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        alert.textFieldAtIndex(0)?.placeholder = "Trip to Taipei"
+        alert.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == alertView.cancelButtonIndex {
+            println ("cancelled")
+        }
+        else{
+            var stackName = alertView.textFieldAtIndex(0)!.text
+            self.addStack(stackName)
+        }
+    }
+    
+    
+    func addStack(stackName : String) {
+        println(stackName)
+        
+        var shortStack = PFObject(className: "Stack")
+        shortStack.ACL = PFACL(user: PFUser.currentUser()!)
+        shortStack["text"] = stackName
+        shortStack["user"] = PFUser.currentUser()
+        
+        shortStack.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            println("saved Stack")
+            self.getStacks({ () -> Void in
+                //
+            })
+        }
+        
+        
     }
 
     

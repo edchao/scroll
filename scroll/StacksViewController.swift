@@ -48,7 +48,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.tableHeaderView = UIView(frame: CGRectMake(0, 0, screenSize.width, 11))
         table_stacks.backgroundColor = UIColor.clearColor()
         self.view.addSubview(table_stacks)
-//        self.table_stacks.rowHeight = UITableViewAutomaticDimension
+        self.table_stacks.rowHeight = UITableViewAutomaticDimension
 
         // BUTTONS
         
@@ -89,7 +89,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func getStacks(completion:() -> Void){
         var query = PFQuery(className: "Stack")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
-        query.addAscendingOrder("createdAt")
+        query.addDescendingOrder("updatedAt")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.stacks = objects as! [PFObject]?
@@ -206,11 +206,50 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100 //UITableViewAutomaticDimension;
+        return UITableViewAutomaticDimension;
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100 //UITableViewAutomaticDimension
+        return UITableViewAutomaticDimension
+    }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            var query = PFQuery(className:"Stack")
+            self.stackId = self.stacks[indexPath.row].objectId
+            query.getObjectInBackgroundWithId(self.stackId) {
+                (note: PFObject?, error: NSError?) -> Void in
+                if error == nil && note != nil {
+                    println(note)
+                    
+                    note?.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
+                        if error == nil && success == true {
+                            self.stacks.removeAtIndex(indexPath.row)
+                            self.table_stacks.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                            
+                            self.getStacks({ () -> Void in
+                                //
+                            })
+                            
+                        }
+                        else {
+                            println(error)
+                        }
+                    })
+                } else {
+                    println(error)
+                }
+            }
+            
+            
+        }
     }
     
     
