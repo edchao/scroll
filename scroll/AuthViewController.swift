@@ -12,6 +12,10 @@ import Parse
 class AuthViewController: UIViewController, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     
     
+    // PARSE VARS
+    var currentUser = PFUser.currentUser()
+    
+    
     // CLASS VARS
     
     var logotype: UIImageView!
@@ -138,8 +142,20 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         let recognizer = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard:"))
         view.addGestureRecognizer(recognizer)
+        
+
+        // INIT
+        if currentUser != nil {
+            UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.card.center.y = self.card_origin_y + 110
+                }, completion: { (Bool) -> Void in
+                    self.presentModalHome(self)
+            })
+        }
+        
 
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -10,7 +10,8 @@ import UIKit
 import Parse
 
 class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIAlertViewDelegate {
-    
+
+    var btn_logout : UIBarButtonItem!
     var btn_stacks : UIButton!
     var btn_add : UIBarButtonItem!
 
@@ -54,6 +55,10 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
         self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
+        
+        btn_logout = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapLogout:")
+        self.navigationController?.topViewController.navigationItem.leftBarButtonItem = btn_logout
+        
         
         // ALERT
         
@@ -99,6 +104,13 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
             
         }
+    }
+    
+    func didTapLogout(sender:UIBarButtonItem){
+        PFUser.logOut()
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            //
+        })
     }
     
     func didTapAdd(sender:UIBarButtonItem){
