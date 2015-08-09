@@ -111,7 +111,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         table_home.registerClass(HomeTableViewCell.self, forCellReuseIdentifier: "cell")
         table_home.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
         table_home.separatorColor = UIColor.strokeColor(alpha: 1)
-        table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         table_home.tableHeaderView = nil
         table_home.backgroundColor = UIColor.clearColor()
         view.addSubview(table_home)
@@ -163,23 +163,31 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func scrollToBottom(animated: Bool) {
 
+        var iPath = NSIndexPath(forRow: self.table_home.numberOfRowsInSection(0)-1,
+            inSection: self.table_home.numberOfSections()-1)
+        self.table_home.scrollToRowAtIndexPath(iPath,
+            atScrollPosition: UITableViewScrollPosition.Bottom,
+            animated: true)
         
-        let delay = 0.1 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//        self.table_home.scrollRectToVisible(CGRectMake(0, self.table_home.contentSize.height - self.table_home.bounds.size.height, self.table_home.bounds.size.width, self.table_home.bounds.size.height), animated: true)
+
         
-        self.table_home.contentOffset.y = self.tableOffset.y
-        
-        dispatch_after(time, dispatch_get_main_queue(), {
-            
-            let numberOfSections = self.table_home.numberOfSections()
-            let numberOfRows = self.table_home.numberOfRowsInSection(numberOfSections-1)
-            
-            if numberOfRows > 0 {
-                let indexPath = NSIndexPath(forRow: numberOfRows-1, inSection: (numberOfSections-1))
-                self.table_home.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
-            }
-            
-        })
+//        let delay = 0.1 * Double(NSEC_PER_SEC)
+//        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//        
+//        self.table_home.contentOffset.y = self.tableOffset.y
+//        
+//        dispatch_after(time, dispatch_get_main_queue(), {
+//            
+//            let numberOfSections = self.table_home.numberOfSections()
+//            let numberOfRows = self.table_home.numberOfRowsInSection(numberOfSections-1)
+//            
+//            if numberOfRows > 0 {
+//                let indexPath = NSIndexPath(forRow: numberOfRows-1, inSection: (numberOfSections-1))
+//                self.table_home.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
+//            }
+//            
+//        })
     }
     
     // TRANSITION
@@ -290,6 +298,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
                 self.table_home.reloadData()
+                self.table_home.layoutIfNeeded()
             }, completion: { (Bool) -> Void in
                 self.getSections()
                 completion()

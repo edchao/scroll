@@ -37,14 +37,14 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // TABLE SETUP
         
-        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+        table_home.frame = CGRectMake(0, 0, screenSize.width, screenSize.height - 50);
         table_home.rowHeight = 100
         table_home.delegate = self
         table_home.dataSource = self
         table_home.registerClass(HomeTableViewCell.self, forCellReuseIdentifier: "cell")
         table_home.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
         table_home.separatorColor = UIColor.strokeColor(alpha: 1)
-        table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         table_home.tableHeaderView = nil
         table_home.backgroundColor = UIColor.clearColor()
         view.addSubview(table_home)
@@ -81,6 +81,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(animated: Bool) {
         getNotes { () -> Void in
             println("reloaded table")
+            self.scrollToBottom(true)
         }
         
     }
@@ -107,13 +108,10 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         query.whereKey("stacks", equalTo: self.stackObject)
         query.addAscendingOrder("createdAt")
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-            UIView.animateWithDuration(0, animations: { () -> Void in
-                self.notes = objects as! [PFObject]?
-                self.table_home.reloadData()
-            }, completion: { (Bool) -> Void in
-                    completion()
-            })
-            
+            self.notes = objects as! [PFObject]?
+            self.table_home.reloadData()
+            self.table_home.layoutIfNeeded()
+            completion()
         }
     }
     
@@ -196,6 +194,18 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
     }
+    
+    // SCROLL TO BOTTOM
+    
+    func scrollToBottom(animated: Bool) {
+        
+        var iPath = NSIndexPath(forRow: self.table_home.numberOfRowsInSection(0)-1,
+            inSection: self.table_home.numberOfSections()-1)
+        self.table_home.scrollToRowAtIndexPath(iPath,
+            atScrollPosition: UITableViewScrollPosition.Bottom,
+            animated: true)
+    }
+
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;

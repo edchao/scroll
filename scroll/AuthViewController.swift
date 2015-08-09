@@ -92,6 +92,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         input_email.userInteractionEnabled = true
         input_email.font = UIFont.primaryFont()
         input_email.placeholder = "Email"
+        input_email.autocapitalizationType = UITextAutocapitalizationType.None
         card.addSubview(input_email)
         
         input_pw = UITextField(frame: CGRect(x: 20, y: 56, width: view.frame.width - 40, height: 40))
@@ -100,6 +101,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         input_pw.userInteractionEnabled = true
         input_pw.font = UIFont.primaryFont()
         input_pw.placeholder = "Password"
+        input_pw.autocapitalizationType = UITextAutocapitalizationType.None
         card.addSubview(input_pw)
 
         
