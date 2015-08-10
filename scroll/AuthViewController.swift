@@ -29,6 +29,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var input_pw : UITextField!
     var btn_go: UIButton!
     var btn_toggle: UIButton!
+    var btn_forgot: UIButton!
     
     
     var kbSizeVal : CGFloat! = 300
@@ -131,6 +132,16 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         btn_go.setTitle("Sign up", forState: .Normal)
         btn_go.addTarget(self, action: "didTapGo:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_go)
+        
+        
+        btn_forgot = UIButton(frame: CGRect(x: 20, y: 30, width: 80, height: 30))
+        btn_forgot.backgroundColor = UIColor.clearColor()
+        btn_forgot.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_forgot.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        btn_forgot.setTitle("Forgot?", forState: .Normal)
+        btn_forgot.addTarget(self, action: "didTapForgot:", forControlEvents: .TouchUpInside)
+        btn_forgot.alpha = 0
+        view.addSubview(btn_forgot)
         
         
         
@@ -245,13 +256,72 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         if self.btn_toggle.selected {
             self.btn_toggle.selected = false
             self.btn_go.setTitle("Sign up", forState: .Normal)
+            self.btn_forgot.alpha = 0
             toggleAnimation()
         }else{
             self.btn_toggle.selected = true
             self.btn_go.setTitle("Log in", forState: .Normal)
+            self.btn_forgot.alpha = 1
             toggleAnimation()
         }
         
+    }
+    
+    func didTapForgot(sender:AnyObject){
+        PFUser.requestPasswordResetForEmailInBackground(self.input_email.text.lowercaseString)
+        
+//        var alert = UIAlertController(title: nil, message: "Your password has been sent to your email address.", preferredStyle: UIAlertControllerStyle.Alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+//        self.presentViewController(alert, animated: true, completion: nil)
+//        
+        
+        let titlePrompt = UIAlertController(title: "Reset password",
+            message: "Enter the email you registered with:",
+            preferredStyle: .Alert)
+        
+        var titleTextField: UITextField?
+        titlePrompt.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            titleTextField = textField
+            textField.placeholder = "Email"
+        }
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        
+        titlePrompt.addAction(cancelAction)
+        
+        titlePrompt.addAction(UIAlertAction(title: "Reset", style: .Destructive, handler: { (action) -> Void in
+            if let textField = titleTextField {
+                self.resetPassword(textField.text)
+            }
+        }))
+        
+        self.presentViewController(titlePrompt, animated: true, completion: nil)
+        
+    }
+    
+    
+    func resetPassword(email : String){
+        
+        // convert the email string to lower case
+        let emailToLowerCase = email.lowercaseString
+        // remove any whitespaces before and after the email address
+        let emailClean = emailToLowerCase.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        PFUser.requestPasswordResetForEmailInBackground(emailClean) { (success, error) -> Void in
+            if (error == nil) {
+                let success = UIAlertController(title: "Success", message: "Success! Check your email!", preferredStyle: .Alert)
+                let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                success.addAction(okButton)
+                self.presentViewController(success, animated: false, completion: nil)
+                
+            }else {
+                let errormessage = error!.userInfo!["error"] as! NSString
+                let error = UIAlertController(title: "Cannot complete request", message: errormessage as String, preferredStyle: .Alert)
+                let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                error.addAction(okButton)
+                self.presentViewController(error, animated: false, completion: nil)
+            }
+        }
     }
     
     
