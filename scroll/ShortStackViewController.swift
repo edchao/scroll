@@ -103,6 +103,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     // QUERIES
     
     func getNotes(completion:() -> Void){
+        tableOffset = table_home.contentOffset
         var query = PFQuery(className: "Note")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.whereKey("stacks", equalTo: self.stackObject)
@@ -199,11 +200,22 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func scrollToBottom(animated: Bool) {
         
-        var iPath = NSIndexPath(forRow: self.table_home.numberOfRowsInSection(0)-1,
-            inSection: self.table_home.numberOfSections()-1)
-        self.table_home.scrollToRowAtIndexPath(iPath,
-            atScrollPosition: UITableViewScrollPosition.Bottom,
-            animated: true)
+        let delay = 0.2 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        self.table_home.contentOffset.y = self.tableOffset.y
+        
+        dispatch_after(time, dispatch_get_main_queue(), {
+            
+            let numberOfSections = self.table_home.numberOfSections()
+            let numberOfRows = self.table_home.numberOfRowsInSection(numberOfSections-1)
+            
+            if numberOfRows > 0 {
+                let indexPath = NSIndexPath(forRow: numberOfRows-1, inSection: (numberOfSections-1))
+                self.table_home.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
+            }
+            
+        })
     }
 
     
