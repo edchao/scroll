@@ -218,12 +218,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             if (success) {
                 println("saved issue")
                 self.textView_compose.text = ""
-                self.delegate?.reloadHomeTable(self)
                 self.textView_compose.endEditing(true)
                 if self.stackObject != nil {
                     var relation = note.relationForKey("stacks")
                     relation.addObject(self.stackObject)
                     note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                        self.delegate?.reloadHomeTable(self)
                         println("saved to short stack")
                         self.dismissViewControllerAnimated(false, completion: { () -> Void in
                             //
