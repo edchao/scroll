@@ -219,6 +219,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 println("saved issue")
                 self.textView_compose.text = ""
                 self.textView_compose.endEditing(true)
+                self.delegate?.reloadHomeTable(self)
                 if self.stackObject != nil {
                     var relation = note.relationForKey("stacks")
                     relation.addObject(self.stackObject)
