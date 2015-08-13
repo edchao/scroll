@@ -30,6 +30,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var btn_go: UIButton!
     var btn_toggle: UIButton!
     var btn_forgot: UIButton!
+    var btn_visibility : UIButton!
     
     
     var kbSizeVal : CGFloat! = 300
@@ -106,6 +107,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         input_pw.userInteractionEnabled = true
         input_pw.font = UIFont.primaryFont()
         input_pw.placeholder = "Password"
+        input_pw.secureTextEntry = true
         input_pw.autocapitalizationType = UITextAutocapitalizationType.None
         card.addSubview(input_pw)
 
@@ -120,6 +122,14 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         btn_toggle.setTitle("Sign up", forState: .Selected)
         btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
         view.addSubview(btn_toggle)
+        
+        btn_visibility = UIButton(frame: CGRect(x: screenSize.width - 55, y: 58, width: 52, height: 34))
+        btn_visibility.backgroundColor = UIColor.clearColor()
+        btn_visibility.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_visibility.setImage(UIImage(named: "invisible"), forState: .Normal)
+        btn_visibility.setImage(UIImage(named: "visible"), forState: .Selected)
+        btn_visibility.addTarget(self, action: "didToggleVisibility:", forControlEvents: .TouchUpInside)
+        card.addSubview(btn_visibility)
         
         btn_go = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
         btn_go.center.y = card.frame.height - 30
@@ -252,6 +262,19 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
     }
     
+    func didToggleVisibility(sender:UIButton){
+        if self.btn_visibility.selected {
+            self.btn_visibility.selected = false
+            input_pw.secureTextEntry = true
+        }else{
+            self.btn_visibility.selected = true
+            input_pw.font = UIFont.primaryFont()
+            input_pw.secureTextEntry = false
+
+        }
+
+    }
+    
     func didToggle(sender:AnyObject){
         if self.btn_toggle.selected {
             self.btn_toggle.selected = false
@@ -269,11 +292,6 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     func didTapForgot(sender:AnyObject){
         PFUser.requestPasswordResetForEmailInBackground(self.input_email.text.lowercaseString)
-        
-//        var alert = UIAlertController(title: nil, message: "Your password has been sent to your email address.", preferredStyle: UIAlertControllerStyle.Alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-//        self.presentViewController(alert, animated: true, completion: nil)
-//        
         
         let titlePrompt = UIAlertController(title: "Reset password",
             message: "Enter the email you registered with:",
