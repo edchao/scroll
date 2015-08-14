@@ -31,6 +31,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     var hIndent : CGFloat = 30.0
     var card_origin_y : CGFloat! = 300
     var noteText : String! = ""
+    var actInd : UIActivityIndicatorView!
+
     
     // DELEGATE VARS
     
@@ -117,7 +119,16 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         btn_save.titleLabel!.font = UIFont.primaryFont()
         btn_save.setTitle("Save", forState: .Normal)
         btn_save.addTarget(self, action: "didTapSave:", forControlEvents: .TouchUpInside)
+        btn_save.alpha = 1.0
         card.addSubview(btn_save)
+        
+        // ACTIVITY INDICATOR
+        actInd = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: screenSize.width - 110, y: card.frame.height - 50, width: 40, height: 40)
+        actInd.hidesWhenStopped = true
+        actInd.color = UIColor.grayColor()
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        card.addSubview(actInd)
         
         
         // KEYBOARD
@@ -194,6 +205,21 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
 
     
+    func disableBtn(){
+        self.textView_compose.alpha = 0.3
+        self.actInd.startAnimating()
+        self.btn_save.alpha = 0.3
+        self.btn_save.enabled = false
+    }
+    
+    func enableBtn(){
+        self.textView_compose.alpha = 1
+        self.actInd.stopAnimating()
+        self.btn_save.alpha = 1
+        self.btn_save.enabled = true
+    }
+    
+    
     // BUTTON ACTIONS
     
     func didTapCancel(sender:UIButton){
@@ -207,6 +233,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
 
     func didTapSave(sender:UIButton){
+        
+        self.disableBtn()
 
         var note = PFObject(className: "Note")
         note.ACL = PFACL(user: PFUser.currentUser()!)
@@ -226,6 +254,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                     note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                         self.delegate?.reloadHomeTable(self)
                         println("saved to short stack")
+                        self.enableBtn()
                         self.dismissViewControllerAnimated(false, completion: { () -> Void in
                             //
                         })
