@@ -95,6 +95,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var query = PFQuery(className: "Stack")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addDescendingOrder("updatedAt")
+//        query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.stacks = objects as! [PFObject]?

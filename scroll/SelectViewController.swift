@@ -104,6 +104,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var query = PFQuery(className: "Stack")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
+        query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.stacks = objects as! [PFObject]?
@@ -165,7 +166,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 relation.addObject(self.stacks[indexPath.row])
                 note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                     println("saved to short stack")
-                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         //
                     })
                 }

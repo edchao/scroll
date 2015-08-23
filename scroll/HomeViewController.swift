@@ -82,12 +82,12 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     var btn_compose : UIButton!
     var stroke_compose: UIView!
     var tableOffset : CGPoint!
-    var sectionCount : Int!
     
     
     // PARSE VARIABLES
     var notes : [PFObject]! = []
     var noteId : String! = "000"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,25 +154,18 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     override func viewWillAppear(animated: Bool) {
         getNotes { () -> Void in
             println("reloaded table")
-            self.scrollToBottom(true)
+            self.scrollToBottom(false)
         }
         
     }
+    
     
     // SCROLL TO BOTTOM
     
     func scrollToBottom(animated: Bool) {
 
-//        var iPath = NSIndexPath(forRow: self.table_home.numberOfRowsInSection(0)-1,
-//            inSection: self.table_home.numberOfSections()-1)
-//        self.table_home.scrollToRowAtIndexPath(iPath,
-//            atScrollPosition: UITableViewScrollPosition.Bottom,
-//            animated: true)
         
-//        self.table_home.scrollRectToVisible(CGRectMake(0, self.table_home.contentSize.height - self.table_home.bounds.size.height, self.table_home.bounds.size.width, self.table_home.bounds.size.height), animated: true)
-
-        
-        let delay = 0.2 * Double(NSEC_PER_SEC)
+        let delay = 0.1 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
         self.table_home.contentOffset.y = self.tableOffset.y
@@ -216,7 +209,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func editHomeTable(sender:EditViewController){
         self.getNotes { () -> Void in
             println("reloaded table")
-            self.scrollToBottom(true)
+            self.scrollToBottom(false)
         }
         
     }
@@ -294,13 +287,13 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         var query = PFQuery(className: "Note")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
+        query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
                 self.table_home.reloadData()
                 self.table_home.layoutIfNeeded()
             }, completion: { (Bool) -> Void in
-                self.getSections()
                 completion()
             })
 
@@ -308,21 +301,6 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
 
-    // GET SECTIONS
-    func getSections(){
-        var dateArray: Array<String> = []
-
-        for item in notes {
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "EEEE, MMMM d YYYY"
-            dateArray.append(dateFormatter.stringFromDate(item.createdAt!))
-            
-        }
-        sectionCount = NSSet(array: dateArray).count
-        println(sectionCount)
-    }
-    
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
@@ -333,18 +311,19 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
 
+    // SECTIONS
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.notes.count
     }
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
     
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return sectionCount
-//    }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "hello"
-//    }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
