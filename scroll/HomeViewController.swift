@@ -287,6 +287,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         var query = PFQuery(className: "Note")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
+        query.limit = 1000
         query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
