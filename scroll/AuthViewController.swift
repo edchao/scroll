@@ -41,7 +41,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLoad()
         
         // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        view.backgroundColor = UIColor.neutralColor(1.0)
         
         
         // LOGOTYPE
@@ -59,7 +59,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         label_punchline.numberOfLines = 2
         label_punchline.textAlignment = .Center
         label_punchline.font = UIFont.tertiaryFont()
-        label_punchline.textColor = UIColor.primaryColor(alpha: 1.0)
+        label_punchline.textColor = UIColor.primaryColor(1.0)
         label_punchline.center.y = screenSize.height * 0.4
         label_punchline.center.x = view.center.x
         view.addSubview(label_punchline)
@@ -78,15 +78,15 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         // STROKES
         
         stroke_card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_card.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
+        stroke_card.backgroundColor = UIColor.primaryAccent(1.0)
         card.addSubview(stroke_card)
         
         stroke_email = UIView(frame: CGRect(x: 20, y: 50, width: view.frame.width - 20, height: 1))
-        stroke_email.backgroundColor = UIColor.strokeColor(alpha: 1.0)
+        stroke_email.backgroundColor = UIColor.strokeColor(1.0)
         card.addSubview(stroke_email)
         
         stroke_password = UIView(frame: CGRect(x: 20, y: 100, width: view.frame.width - 20, height: 1))
-        stroke_password.backgroundColor = UIColor.strokeColor(alpha: 1.0)
+        stroke_password.backgroundColor = UIColor.strokeColor(1.0)
         card.addSubview(stroke_password)
         
         
@@ -94,7 +94,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         input_email = UITextField(frame: CGRect(x: 20, y: 6, width: view.frame.width - 40, height: 40))
         input_email.backgroundColor = UIColor.clearColor()
-        input_email.textColor = UIColor.primaryColor(alpha: 1)
+        input_email.textColor = UIColor.primaryColor(1)
         input_email.userInteractionEnabled = true
         input_email.font = UIFont.primaryFont()
         input_email.placeholder = "Email"
@@ -103,7 +103,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         input_pw = UITextField(frame: CGRect(x: 20, y: 56, width: view.frame.width - 40, height: 40))
         input_pw.backgroundColor = UIColor.clearColor()
-        input_pw.textColor = UIColor.primaryColor(alpha: 1)
+        input_pw.textColor = UIColor.primaryColor(1)
         input_pw.userInteractionEnabled = true
         input_pw.font = UIFont.primaryFont()
         input_pw.placeholder = "Password"
@@ -116,7 +116,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 30, width: 80, height: 30))
         btn_toggle.backgroundColor = UIColor.clearColor()
-        btn_toggle.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_toggle.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
         btn_toggle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
         btn_toggle.setTitle("Login", forState: .Normal)
         btn_toggle.setTitle("Sign up", forState: .Selected)
@@ -125,7 +125,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         btn_visibility = UIButton(frame: CGRect(x: screenSize.width - 55, y: 58, width: 52, height: 34))
         btn_visibility.backgroundColor = UIColor.clearColor()
-        btn_visibility.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_visibility.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
         btn_visibility.setImage(UIImage(named: "invisible"), forState: .Normal)
         btn_visibility.setImage(UIImage(named: "visible"), forState: .Selected)
         btn_visibility.addTarget(self, action: "didToggleVisibility:", forControlEvents: .TouchUpInside)
@@ -133,11 +133,11 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         btn_go = UIButton(frame: CGRect(x: 0, y: 30, width: screenSize.width, height: 60))
         btn_go.center.y = card.frame.height - 30
-        btn_go.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_go.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_go.backgroundColor = UIColor.neutralColor(0)
+        btn_go.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_go.layer.cornerRadius = 4
         btn_go.layer.borderWidth = 1
-        btn_go.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
+        btn_go.layer.borderColor = UIColor.primaryAccent(0).CGColor
         btn_go.titleLabel!.font = UIFont.secondaryFontLarge()
         btn_go.setTitle("Sign up", forState: .Normal)
         btn_go.addTarget(self, action: "didTapGo:", forControlEvents: .TouchUpInside)
@@ -146,7 +146,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         btn_forgot = UIButton(frame: CGRect(x: 20, y: 30, width: 80, height: 30))
         btn_forgot.backgroundColor = UIColor.clearColor()
-        btn_forgot.setTitleColor(UIColor.primaryAccent(alpha: 1.0), forState: .Normal)
+        btn_forgot.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
         btn_forgot.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         btn_forgot.setTitle("Forgot?", forState: .Normal)
         btn_forgot.addTarget(self, action: "didTapForgot:", forControlEvents: .TouchUpInside)
@@ -200,7 +200,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         kbSizeVal = kbSize.height
         kbUp = true
         
-        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             
             self.logotype.center.y = screenSize.height * 0.2
             self.label_punchline.center.y = screenSize.height * 0.35
@@ -221,7 +221,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         var animationCurve = curveValue.integerValue
         kbUp = false
         
-        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             
             self.logotype.center.y = screenSize.height * 0.25
             self.label_punchline.center.y = screenSize.height * 0.4
@@ -291,7 +291,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     func didTapForgot(sender:AnyObject){
-        PFUser.requestPasswordResetForEmailInBackground(self.input_email.text.lowercaseString)
+        PFUser.requestPasswordResetForEmailInBackground(self.input_email.text!.lowercaseString)
         
         let titlePrompt = UIAlertController(title: "Reset password",
             message: "Enter the email you registered with:",
@@ -309,7 +309,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         titlePrompt.addAction(UIAlertAction(title: "Reset", style: .Destructive, handler: { (action) -> Void in
             if let textField = titleTextField {
-                self.resetPassword(textField.text)
+                self.resetPassword(textField.text!)
             }
         }))
         
@@ -333,7 +333,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                 self.presentViewController(success, animated: false, completion: nil)
                 
             }else {
-                let errormessage = error!.userInfo!["error"] as! NSString
+                let errormessage = error!.userInfo["error"] as! NSString
                 let error = UIAlertController(title: "Cannot complete request", message: errormessage as String, preferredStyle: .Alert)
                 let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 error.addAction(okButton)
@@ -348,7 +348,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         // LOG IN
         if self.btn_toggle.selected {
-            PFUser.logInWithUsernameInBackground(input_email.text.lowercaseString, password:input_pw.text) {
+            PFUser.logInWithUsernameInBackground(input_email.text!.lowercaseString, password:input_pw.text!) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
                     
@@ -370,12 +370,12 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         // SIGN UP
         }else{
             var user = PFUser()
-            user.username = self.input_email.text.lowercaseString
+            user.username = self.input_email.text!.lowercaseString
             user.password = self.input_pw.text
             
             user.signUpInBackgroundWithBlock { (success, error) -> Void in
                 if success {
-                    println("successful sign up")
+                    print("successful sign up")
                     
                     self.input_email.endEditing(true)
                     self.input_pw.endEditing(true)

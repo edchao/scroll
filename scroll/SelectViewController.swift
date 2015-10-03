@@ -36,7 +36,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.title = "Select Short Stack"
         
         // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        view.backgroundColor = UIColor.neutralColor(1.0)
         
         
         // SETUP TABLE
@@ -47,12 +47,12 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.dataSource = self
         table_stacks.registerClass(StacksTableViewCell.self, forCellReuseIdentifier: "cell")
         table_stacks.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
-        table_stacks.separatorColor = UIColor.strokeColor(alpha: 1)
+        table_stacks.separatorColor = UIColor.strokeColor(1)
         table_stacks.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         table_stacks.tableHeaderView = nil
         table_stacks.backgroundColor = UIColor.clearColor()
         self.view.addSubview(table_stacks)
-        table_stacks.tableFooterView = UIView(frame: CGRect.zeroRect)
+        table_stacks.tableFooterView = UIView(frame: CGRect.zero)
         self.table_stacks.rowHeight = UITableViewAutomaticDimension
         
         // ALERT
@@ -69,10 +69,10 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // BUTTONS
         
         btn_cancel = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapCancel:")
-        self.navigationController?.topViewController.navigationItem.leftBarButtonItem = btn_cancel
+        self.navigationController?.topViewController!.navigationItem.leftBarButtonItem = btn_cancel
         
         btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
-        self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
+        self.navigationController?.topViewController!.navigationItem.rightBarButtonItem = btn_add
 
     }
 
@@ -126,17 +126,17 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == alertView.cancelButtonIndex {
-            println ("cancelled")
+            print ("cancelled")
         }
         else{
             var stackName = alertView.textFieldAtIndex(0)!.text
-            self.addStack(stackName)
+            self.addStack(stackName!)
         }
     }
     
     
     func addStack(stackName : String) {
-        println(stackName)
+        print(stackName)
         
         var shortStack = PFObject(className: "Stack")
         shortStack.ACL = PFACL(user: PFUser.currentUser()!)
@@ -144,7 +144,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         shortStack["user"] = PFUser.currentUser()
         
         shortStack.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("saved Stack")
+            print("saved Stack")
             self.getStacks({ () -> Void in
                 //
             })
@@ -165,14 +165,14 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 var relation = note!.relationForKey("stacks")
                 relation.addObject(self.stacks[indexPath.row])
                 note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                    println("saved to short stack")
+                    print("saved to short stack")
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         //
                     })
                 }
                 
             } else {
-                println(error)
+                print(error)
             }
         }
         

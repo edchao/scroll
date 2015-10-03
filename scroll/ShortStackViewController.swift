@@ -32,7 +32,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        view.backgroundColor = UIColor.neutralColor(1.0)
         
         
         // TABLE SETUP
@@ -43,12 +43,12 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         table_home.dataSource = self
         table_home.registerClass(HomeTableViewCell.self, forCellReuseIdentifier: "cell")
         table_home.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
-        table_home.separatorColor = UIColor.strokeColor(alpha: 1)
+        table_home.separatorColor = UIColor.strokeColor(1)
         table_home.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         table_home.tableHeaderView = nil
         table_home.backgroundColor = UIColor.clearColor()
         view.addSubview(table_home)
-        table_home.tableFooterView = UIView(frame: CGRect.zeroRect)
+        table_home.tableFooterView = UIView(frame: CGRect.zero)
         self.table_home.rowHeight = UITableViewAutomaticDimension
         
         
@@ -61,14 +61,14 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         btn_compose.backgroundColor = UIColor.whiteColor()
         btn_compose.addTarget(self, action: "didTapCompose:", forControlEvents: .TouchUpInside)
         btn_compose.titleLabel!.font = UIFont.primaryFont()
-        btn_compose.setTitleColor(UIColor.primaryColor(alpha: 0.5), forState: UIControlState.Normal)
+        btn_compose.setTitleColor(UIColor.primaryColor(0.5), forState: UIControlState.Normal)
         view.addSubview(btn_compose)
         
         
         // STROKE COMPOSE
         
         stroke_compose = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_compose.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
+        stroke_compose.backgroundColor = UIColor.primaryAccent(1.0)
         btn_compose.addSubview(stroke_compose)
         
         
@@ -80,7 +80,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         getNotes { () -> Void in
-            println("reloaded table")
+            print("reloaded table")
             self.scrollToBottom(true)
         }
         
@@ -121,14 +121,14 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func reloadHomeTable(sender:ComposeViewController){
         self.getNotes { () -> Void in
-            println("reloaded table")
+            print("reloaded table")
         }
         
     }
     
     func editHomeTable(sender:EditViewController){
         self.getNotes { () -> Void in
-            println("reloaded table")
+            print("reloaded table")
         }
         
     }
@@ -154,7 +154,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
             if error == nil && note != nil {
-                println(note)
+                print(note)
                 
                 note?.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                     if error == nil && success == true {
@@ -167,11 +167,11 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                     }
                     else {
-                        println(error)
+                        print(error)
                     }
                 })
             } else {
-                println(error)
+                print(error)
             }
         }
         
@@ -208,7 +208,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         
         dispatch_after(time, dispatch_get_main_queue(), {
             
-            let numberOfSections = self.table_home.numberOfSections()
+            let numberOfSections = self.table_home.numberOfSections
             let numberOfRows = self.table_home.numberOfRowsInSection(numberOfSections-1)
             
             if numberOfRows > 0 {
