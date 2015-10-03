@@ -105,7 +105,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
         query.cachePolicy = .NetworkElseCache
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.stacks = objects as! [PFObject]?
                 self.table_stacks.reloadData()

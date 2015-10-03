@@ -109,7 +109,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.whereKey("stacks", equalTo: self.stackObject)
         query.addAscendingOrder("createdAt")
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.notes = objects as! [PFObject]?
             self.table_home.reloadData()
             self.table_home.layoutIfNeeded()

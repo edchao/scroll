@@ -287,7 +287,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         query.addAscendingOrder("createdAt")
         query.limit = 1000
         query.cachePolicy = .NetworkElseCache
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
                 self.notes = objects as! [PFObject]?
                 self.table_home.reloadData()
