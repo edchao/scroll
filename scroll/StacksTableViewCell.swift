@@ -15,11 +15,11 @@ class StacksTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        self.contentView.backgroundColor = UIColor.neutralColor(1.0)
         
         // LABEL
         label_text = UILabel(frame: CGRectMake(30, 30, self.bounds.size.width, 25))
-        label_text.textColor = UIColor.primaryColor(alpha: 1)
+        label_text.textColor = UIColor.primaryColor(1)
         label_text.font = UIFont.tertiaryFont()
         label_text.numberOfLines = 0
         self.contentView.addSubview(label_text)
@@ -30,7 +30,7 @@ class StacksTableViewCell: UITableViewCell {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     
     override func layoutSubviews() {
@@ -40,7 +40,7 @@ class StacksTableViewCell: UITableViewCell {
     
     func layout(){
         
-        self.label_text.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.label_text.translatesAutoresizingMaskIntoConstraints = false
         
         
         let viewsDictionary = [
@@ -53,8 +53,8 @@ class StacksTableViewCell: UITableViewCell {
         
         let view_constraint_V:NSArray = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[label_text]-30-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: nil, views: viewsDictionary)
         
-        self.contentView.addConstraints(view_constraint_H as [AnyObject])
-        self.contentView.addConstraints(view_constraint_V as [AnyObject])
+        self.contentView.addConstraints(view_constraint_H as! [NSLayoutConstraint])
+        self.contentView.addConstraints(view_constraint_V as! [NSLayoutConstraint])
         
         
     }

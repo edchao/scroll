@@ -14,7 +14,7 @@ class NavigationViewController: UINavigationController {
         super.viewDidLoad()
         
         UINavigationBar.appearance().backItem?.hidesBackButton = false
-        UINavigationBar.appearance().tintColor = UIColor.primaryAccent(alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.primaryAccent(1.0)
         UINavigationBar.appearance().translucent = true
         UINavigationBar.appearance().shadowImage = UIImage()
 //        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "bg_nav"), forBarMetrics: UIBarMetrics.Default)

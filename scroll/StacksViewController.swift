@@ -33,7 +33,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.title = "Stacks"
         
         // SETUP VIEW
-        view.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+        view.backgroundColor = UIColor.neutralColor(1.0)
         
         
         // SETUP TABLE
@@ -44,7 +44,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         table_stacks.dataSource = self
         table_stacks.registerClass(StacksTableViewCell.self, forCellReuseIdentifier: "cell")
         table_stacks.separatorInset = UIEdgeInsetsMake(15, 15, 15, 15)
-        table_stacks.separatorColor = UIColor.strokeColor(alpha: 1)
+        table_stacks.separatorColor = UIColor.strokeColor(1)
         table_stacks.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         table_stacks.tableHeaderView = UIView(frame: CGRectMake(0, 0, screenSize.width, 11))
         table_stacks.backgroundColor = UIColor.clearColor()
@@ -54,10 +54,10 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // BUTTONS
         
         btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
-        self.navigationController?.topViewController.navigationItem.rightBarButtonItem = btn_add
+        self.navigationController?.topViewController!.navigationItem.rightBarButtonItem = btn_add
         
         btn_logout = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapLogout:")
-        self.navigationController?.topViewController.navigationItem.leftBarButtonItem = btn_logout
+        self.navigationController?.topViewController!.navigationItem.leftBarButtonItem = btn_logout
         
         
         // ALERT
@@ -122,17 +122,17 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == alertView.cancelButtonIndex {
-            println ("cancelled")
+            print("cancelled")
         }
         else{
             var stackName = alertView.textFieldAtIndex(0)!.text
-            self.addStack(stackName)
+            self.addStack(stackName!)
         }
     }
     
     
     func addStack(stackName : String) {
-        println(stackName)
+        print(stackName)
         
         var shortStack = PFObject(className: "Stack")
         shortStack.ACL = PFACL(user: PFUser.currentUser()!)
@@ -140,7 +140,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         shortStack["user"] = PFUser.currentUser()
         
         shortStack.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            println("saved Stack")
+            print("saved Stack")
             self.getStacks({ () -> Void in
                 //
             })
@@ -204,15 +204,15 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let label : UILabel = UILabel(frame: CGRectMake(20, 0, tableView.frame.size.width, 22))
             let strokeTop : UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
             let strokeBot : UIView = UIView(frame: CGRect(x: 0, y: 21, width: tableView.frame.size.width, height: 1))
-            strokeBot.backgroundColor = UIColor.strokeColor(alpha: 1.0)
-            strokeTop.backgroundColor = UIColor.strokeColor(alpha: 1.0)
+            strokeBot.backgroundColor = UIColor.strokeColor(1.0)
+            strokeTop.backgroundColor = UIColor.strokeColor(1.0)
             label.font = UIFont.primaryFontSmall()
-            label.textColor = UIColor.primaryColor(alpha: 0.7)
+            label.textColor = UIColor.primaryColor(0.7)
             label.text = "SHORT STACKS"
             view.addSubview(label)
             view.addSubview(strokeTop)
             view.addSubview(strokeBot)
-            view.backgroundColor = UIColor.headerColor(alpha: 1.0)
+            view.backgroundColor = UIColor.headerColor(1.0)
             return view
         }
     
@@ -240,7 +240,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
             query.getObjectInBackgroundWithId(self.stackId) {
                 (note: PFObject?, error: NSError?) -> Void in
                 if error == nil && note != nil {
-                    println(note)
+                    print(note)
                     
                     note?.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if error == nil && success == true {
@@ -253,11 +253,11 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         else {
-                            println(error)
+                            print(error)
                         }
                     })
                 } else {
-                    println(error)
+                    print(error)
                 }
             }
             
@@ -271,7 +271,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath.section == 0 {
             cell.label_text.text = "Stack"
             cell.accessoryType = .DisclosureIndicator
-            cell.backgroundColor = UIColor.neutralColor(alpha: 1.0)
+            cell.backgroundColor = UIColor.neutralColor(1.0)
         }else{
             var stack = self.stacks[indexPath.row]
             cell.label_text.text = stack["text"] as! String!

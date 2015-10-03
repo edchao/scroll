@@ -73,14 +73,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         // STROKE CARD
         
         stroke_card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_card.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
+        stroke_card.backgroundColor = UIColor.primaryAccent(1.0)
         card.addSubview(stroke_card)
         
         // TEXTFIELD
         
         textView_compose = UITextView(frame: CGRect(x: 15, y: 10, width: view.frame.width - 20, height: 220))
         textView_compose.backgroundColor = UIColor.clearColor()
-        textView_compose.textColor = UIColor.primaryColor(alpha: 1)
+        textView_compose.textColor = UIColor.primaryColor(1)
         textView_compose.editable = true
         textView_compose.userInteractionEnabled = true
         textView_compose.font = UIFont.primaryFont()
@@ -89,7 +89,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 
         // LABEL
         label_compose = UILabel(frame: CGRect(x: 20, y: 10, width: view.frame.width, height: 30))
-        label_compose.textColor = UIColor.primaryColor(alpha: 0.5)
+        label_compose.textColor = UIColor.primaryColor(0.5)
         label_compose.font = UIFont.primaryFont()
         label_compose.text = "Write something..."
         label_compose.numberOfLines = 2
@@ -99,11 +99,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         // BUTTONS
         btn_cancel = UIButton(frame: CGRect(x: 20, y: 0, width: 54, height: 30))
         btn_cancel.center.y = card.frame.height - 30
-        btn_cancel.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_cancel.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_cancel.backgroundColor = UIColor.neutralColor(0)
+        btn_cancel.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_cancel.layer.cornerRadius = 4
         btn_cancel.layer.borderWidth = 1
-        btn_cancel.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
+        btn_cancel.layer.borderColor = UIColor.primaryAccent(0).CGColor
         btn_cancel.titleLabel!.font = UIFont.primaryFont()
         btn_cancel.setTitle("Cancel", forState: .Normal)
         btn_cancel.addTarget(self, action: "didTapCancel:", forControlEvents: .TouchUpInside)
@@ -111,11 +111,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         btn_save = UIButton(frame: CGRect(x: view.frame.width - 38 - 20, y: 30, width: 38, height: 30))
         btn_save.center.y = card.frame.height - 30
-        btn_save.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_save.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_save.backgroundColor = UIColor.neutralColor(0)
+        btn_save.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_save.layer.cornerRadius = 4
         btn_save.layer.borderWidth = 1
-        btn_save.layer.borderColor = UIColor.primaryAccent(alpha: 0).CGColor
+        btn_save.layer.borderColor = UIColor.primaryAccent(0).CGColor
         btn_save.titleLabel!.font = UIFont.primaryFont()
         btn_save.setTitle("Save", forState: .Normal)
         btn_save.addTarget(self, action: "didTapSave:", forControlEvents: .TouchUpInside)
@@ -158,7 +158,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         var animationCurve = curveValue.integerValue
         
-        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0.06
             self.card.backgroundColor = UIColor.whiteColor()
             self.card.layer.shadowOpacity = 0.3
@@ -174,7 +174,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         var animationCurve = curveValue.integerValue
         
-        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(UInt(animationCurve << 16)), animations: {
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0
             self.card.layer.shadowOpacity = 0
             self.card.backgroundColor = UIColor.whiteColor()
@@ -244,7 +244,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             
             if (success) {
-                println("saved issue")
+                print("saved issue")
                 self.textView_compose.text = ""
                 self.textView_compose.endEditing(true)
                 self.delegate?.reloadHomeTable(self)
@@ -253,7 +253,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                     relation.addObject(self.stackObject)
                     note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                         self.delegate?.reloadHomeTable(self)
-                        println("saved to short stack")
+                        print("saved to short stack")
                         self.enableBtn()
                         self.dismissViewControllerAnimated(false, completion: { () -> Void in
                             //
@@ -261,9 +261,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                     }
                     
                 }else{
-                    println("no stackobject")
+                    print("no stackobject")
                     note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                        println("saved to regular stack")
+                        print("saved to regular stack")
                         self.dismissViewControllerAnimated(false, completion: { () -> Void in
                             //
                         })
@@ -271,7 +271,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 }
 
             } else {
-                println(error!.description)
+                print(error!.description)
             }
 
         }

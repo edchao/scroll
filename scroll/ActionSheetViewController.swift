@@ -65,7 +65,7 @@ class ActionSheetViewController: UIViewController, UIViewControllerTransitioning
         // STROKE CARD
         
         stroke_card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
-        stroke_card.backgroundColor = UIColor.primaryAccent(alpha: 1.0)
+        stroke_card.backgroundColor = UIColor.primaryAccent(1.0)
         card.addSubview(stroke_card)
         
         // BUTTONS
@@ -73,32 +73,32 @@ class ActionSheetViewController: UIViewController, UIViewControllerTransitioning
         btn_edit = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         btn_edit.setTitle("Edit Note", forState: UIControlState.Normal)
         btn_edit.titleLabel!.font = UIFont.secondaryFontLarge()
-        btn_edit.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_edit.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_edit.backgroundColor = UIColor.neutralColor(0)
+        btn_edit.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_edit.addTarget(self, action: "didTapEdit:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_edit)
  
         btn_shortStack = UIButton(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 60))
         btn_shortStack.setTitle("Add to Short Stack", forState: UIControlState.Normal)
         btn_shortStack.titleLabel!.font = UIFont.secondaryFontLarge()
-        btn_shortStack.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_shortStack.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_shortStack.backgroundColor = UIColor.neutralColor(0)
+        btn_shortStack.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_shortStack.addTarget(self, action: "didTapShortStack:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_shortStack)
         
         btn_delete = UIButton(frame: CGRect(x: 0, y: 120, width: view.frame.width, height: 60))
         btn_delete.setTitle("Delete Note", forState: UIControlState.Normal)
         btn_delete.titleLabel!.font = UIFont.secondaryFontLarge()
-        btn_delete.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_delete.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_delete.backgroundColor = UIColor.neutralColor(0)
+        btn_delete.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_delete.addTarget(self, action: "didTapDelete:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_delete)
         
         btn_cancel = UIButton(frame: CGRect(x: 0, y: 180, width: view.frame.width, height: 60))
         btn_cancel.setTitle("Cancel", forState: UIControlState.Normal)
         btn_cancel.titleLabel!.font = UIFont.secondaryFontLarge()
-        btn_cancel.backgroundColor = UIColor.neutralColor(alpha: 0)
-        btn_cancel.setTitleColor(UIColor.primaryAccent(alpha: 1), forState: .Normal)
+        btn_cancel.backgroundColor = UIColor.neutralColor(0)
+        btn_cancel.setTitleColor(UIColor.primaryAccent(1), forState: .Normal)
         btn_cancel.addTarget(self, action: "didTapCancel:", forControlEvents: .TouchUpInside)
         card.addSubview(btn_cancel)
         
