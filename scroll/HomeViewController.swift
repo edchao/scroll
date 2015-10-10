@@ -289,7 +289,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
-                self.notes = objects as! [PFObject]?
+                self.notes = objects as [PFObject]?
                 self.table_home.reloadData()
                 self.table_home.layoutIfNeeded()
             }, completion: { (Bool) -> Void in
