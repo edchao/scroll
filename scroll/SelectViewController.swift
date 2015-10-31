@@ -107,7 +107,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
-                self.stacks = objects as [PFObject]?
+                self.stacks = objects! as [PFObject]
                 self.table_stacks.reloadData()
                 }, completion: { (Bool) -> Void in
                     //
