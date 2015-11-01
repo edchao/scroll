@@ -192,11 +192,11 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     func keyboardWillShow(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         kbSizeVal = kbSize.height
         kbUp = true
         
@@ -214,11 +214,10 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     func keyboardWillHide(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         kbUp = false
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
@@ -362,14 +361,14 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     })
                     
                 } else {
-                    var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    let alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
                     alertView.show()
                 }
             }
 
         // SIGN UP
         }else{
-            var user = PFUser()
+            let user = PFUser()
             user.username = self.input_email.text!.lowercaseString
             user.password = self.input_pw.text
             
@@ -389,7 +388,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     })
                     
                 }else{
-                    var alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    let alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
                     alertView.show()
                 }
             }

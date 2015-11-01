@@ -138,7 +138,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func addStack(stackName : String) {
         print(stackName)
         
-        var shortStack = PFObject(className: "Stack")
+        let shortStack = PFObject(className: "Stack")
         shortStack.ACL = PFACL(user: PFUser.currentUser()!)
         shortStack["text"] = stackName
         shortStack["user"] = PFUser.currentUser()
@@ -157,12 +157,12 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func didSelectStack(sender:AnyObject, indexPath: NSIndexPath){
         
         
-        var query = PFQuery(className:"Note")
+        let query = PFQuery(className:"Note")
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
             if error == nil && note != nil {
                 note!.ACL = PFACL(user: PFUser.currentUser()!)
-                var relation = note!.relationForKey("stacks")
+                let relation = note!.relationForKey("stacks")
                 relation.addObject(self.stacks[indexPath.row])
                 note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                     print("saved to short stack")
@@ -202,7 +202,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var stack = self.stacks[indexPath.row]
+        let stack = self.stacks[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StacksTableViewCell
         cell.label_text.text = stack["text"] as! String!
         

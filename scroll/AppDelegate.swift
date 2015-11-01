@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             keys = NSDictionary(contentsOfFile: path)
         }
         if let dict = keys {
-            let applicationId = keys?["parseApplicationId"] as? String
-            let clientKey = keys?["parseClientKey"] as? String
+            let applicationId = dict["parseApplicationId"] as? String
+            let clientKey = dict["parseClientKey"] as? String
             
             // Initialize Parse.
             Parse.setApplicationId(applicationId!, clientKey: clientKey!)

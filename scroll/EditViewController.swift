@@ -139,11 +139,11 @@ class EditViewController: UIViewController {
     
     func keyboardWillShow(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0.06
@@ -155,11 +155,10 @@ class EditViewController: UIViewController {
     
     func keyboardWillHide(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0
@@ -206,7 +205,7 @@ class EditViewController: UIViewController {
     
     func didTapSave(sender:UIButton){
 
-        var query = PFQuery(className:"Note")
+        let query = PFQuery(className:"Note")
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
             if error == nil && note != nil {

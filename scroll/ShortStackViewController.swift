@@ -149,7 +149,7 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func deleteNote(sender:ActionSheetViewController, indexPath: NSIndexPath){
-        var query = PFQuery(className:"Note")
+        let query = PFQuery(className:"Note")
         self.noteId = self.notes[indexPath.row].objectId
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
@@ -261,8 +261,8 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var note = self.notes[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
+        let note = self.notes[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
         cell.label_text.text = note["text"] as! String!
         
         cell.backgroundColor = UIColor.clearColor()

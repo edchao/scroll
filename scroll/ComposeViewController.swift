@@ -152,11 +152,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     func keyboardWillShow(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0.06
@@ -168,11 +168,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     func keyboardWillHide(notification: NSNotification!) {
         var userInfo = notification.userInfo!
-        var kbSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().size
-        var durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        var animationDuration = durationValue.doubleValue
-        var curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        var animationCurve = curveValue.integerValue
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        let curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        let animationCurve = curveValue.integerValue
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             self.overlay.alpha = 0
@@ -236,7 +235,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         self.disableBtn()
 
-        var note = PFObject(className: "Note")
+        let note = PFObject(className: "Note")
         note.ACL = PFACL(user: PFUser.currentUser()!)
         note["text"] = self.textView_compose.text
         note["user"] = PFUser.currentUser()
@@ -249,7 +248,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 self.textView_compose.endEditing(true)
                 self.delegate?.reloadHomeTable(self)
                 if self.stackObject != nil {
-                    var relation = note.relationForKey("stacks")
+                    let relation = note.relationForKey("stacks")
                     relation.addObject(self.stackObject)
                     note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                         self.delegate?.reloadHomeTable(self)

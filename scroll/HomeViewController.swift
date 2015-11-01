@@ -230,7 +230,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
     func deleteNote(sender:ActionSheetViewController, indexPath: NSIndexPath){
-        var query = PFQuery(className:"Note")
+        let query = PFQuery(className:"Note")
         self.noteId = self.notes[indexPath.row].objectId
         query.getObjectInBackgroundWithId(self.noteId) {
             (note: PFObject?, error: NSError?) -> Void in
@@ -348,7 +348,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            var query = PFQuery(className:"Note")
+            let query = PFQuery(className:"Note")
             self.noteId = self.notes[indexPath.row].objectId
             query.getObjectInBackgroundWithId(self.noteId) {
                 (note: PFObject?, error: NSError?) -> Void in
@@ -381,8 +381,8 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        var note = self.notes[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
+        let note = self.notes[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! HomeTableViewCell
         cell.label_text.text = note["text"] as! String!
         
         cell.backgroundColor = UIColor.clearColor()
@@ -415,7 +415,7 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
         for familyName in fontFamilyNames {
             print("------------------------------")
             print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNamesForFamilyName(familyName as! String)
+            let names = UIFont.fontNamesForFamilyName(familyName)
             print("Font Names = [\(names)]")
         }
     }

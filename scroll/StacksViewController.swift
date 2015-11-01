@@ -235,7 +235,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            var query = PFQuery(className:"Stack")
+            let query = PFQuery(className:"Stack")
             self.stackId = self.stacks[indexPath.row].objectId
             query.getObjectInBackgroundWithId(self.stackId) {
                 (note: PFObject?, error: NSError?) -> Void in
@@ -273,7 +273,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.accessoryType = .DisclosureIndicator
             cell.backgroundColor = UIColor.neutralColor(1.0)
         }else{
-            var stack = self.stacks[indexPath.row]
+            let stack = self.stacks[indexPath.row]
             cell.label_text.text = stack["text"] as! String!
             cell.accessoryType = .DisclosureIndicator
             cell.backgroundColor = UIColor.clearColor()
