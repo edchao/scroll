@@ -104,13 +104,13 @@ class ShortStackViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func getNotes(completion:() -> Void){
         tableOffset = table_home.contentOffset
-        var query = PFQuery(className: "Note")
+        let query = PFQuery(className: "Note")
         query.cachePolicy = .NetworkElseCache
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.whereKey("stacks", equalTo: self.stackObject)
         query.addAscendingOrder("createdAt")
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
-            self.notes = objects as! [PFObject]?
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+            self.notes = objects
             self.table_home.reloadData()
             self.table_home.layoutIfNeeded()
             completion()

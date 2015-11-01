@@ -282,14 +282,14 @@ class HomeViewController: UIViewController , UITableViewDelegate, UITableViewDat
     
     func getNotes(completion:() -> Void){
         tableOffset = table_home.contentOffset
-        var query = PFQuery(className: "Note")
+        let query = PFQuery(className: "Note")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
         query.limit = 1000
         query.cachePolicy = .NetworkElseCache
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
-                self.notes = objects as! [PFObject]?
+                self.notes = objects
                 self.table_home.reloadData()
                 self.table_home.layoutIfNeeded()
             }, completion: { (Bool) -> Void in

@@ -16,7 +16,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-keys.plist
+*/keys.plist
 
 
 # OS Gnenerated Files

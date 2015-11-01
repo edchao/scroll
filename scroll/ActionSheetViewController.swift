@@ -126,7 +126,7 @@ class ActionSheetViewController: UIViewController, UIViewControllerTransitioning
             self.card.center.y = self.card_origin_y
             }) { (Bool) -> Void in
                 self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                    delegate?.editNote(self, indexPath: self.indexPath)
+                    self.delegate?.editNote(self, indexPath: self.indexPath)
                 })
         }
     }
@@ -139,7 +139,7 @@ class ActionSheetViewController: UIViewController, UIViewControllerTransitioning
             self.card.center.y = self.card_origin_y
             }) { (Bool) -> Void in
                 self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                    delegate?.presentSelectModal(self, indexPath: self.indexPath)
+                    self.delegate?.presentSelectModal(self, indexPath: self.indexPath)
                 })
         }
     }

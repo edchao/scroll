@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9AD373F14B346AEC70773065 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3543D5C287A570B5240966E4 /* Pods.framework */; };
 		F32A81661B49EAD000747A07 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A81651B49EAD000747A07 /* EditViewController.swift */; };
-		F331F2B31B73181E00E83562 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F331F2B21B73181E00E83562 /* keys.plist */; };
 		F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F354CEC41B3F4A9B00AE51CD /* Podfile */; };
 		F37EA8E71B5B221900E8DA1D /* StacksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37EA8E61B5B221900E8DA1D /* StacksTableViewCell.swift */; };
 		F39B03B41B6592620071DA7D /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39B03B31B6592620071DA7D /* SelectViewController.swift */; };
@@ -29,6 +28,7 @@
 		F3F6FDD81B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDD61B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf */; };
 		F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3F6FDD71B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf */; };
 		F3F6FDDC1B36581400CAACA6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */; };
+		FF0793B51BE68EF800706C30 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF0793B41BE68EF800706C30 /* keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 		3543D5C287A570B5240966E4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D84638BD98E0E92C4E87556 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F32A81651B49EAD000747A07 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		F331F2B21B73181E00E83562 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		F354CEC41B3F4A9B00AE51CD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		F37EA8E61B5B221900E8DA1D /* StacksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StacksTableViewCell.swift; sourceTree = "<group>"; };
 		F39B03B31B6592620071DA7D /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		F3F6FDD61B3615BE00CAACA6 /* SanFranciscoDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Medium.otf"; sourceTree = "<group>"; };
 		F3F6FDD71B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SanFranciscoDisplay-Regular.otf"; sourceTree = "<group>"; };
 		F3F6FDDB1B36581400CAACA6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		FF0793B41BE68EF800706C30 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				F3F6FDB11B360BB700CAACA6 /* Info.plist */,
-				F331F2B21B73181E00E83562 /* keys.plist */,
+				FF0793B41BE68EF800706C30 /* keys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F331F2B31B73181E00E83562 /* keys.plist in Resources */,
+				FF0793B51BE68EF800706C30 /* keys.plist in Resources */,
 				F354CEC51B3F4A9B00AE51CD /* Podfile in Resources */,
 				F3F6FDBD1B360BB700CAACA6 /* LaunchScreen.xib in Resources */,
 				F3F6FDD91B3615BE00CAACA6 /* SanFranciscoDisplay-Regular.otf in Resources */,

@@ -101,13 +101,13 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // QUERIES
     
     func getStacks(completion:() -> Void){
-        var query = PFQuery(className: "Stack")
+        let query = PFQuery(className: "Stack")
         query.whereKey("user", equalTo: PFUser.currentUser()!)
         query.addAscendingOrder("createdAt")
         query.cachePolicy = .NetworkElseCache
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             UIView.animateWithDuration(0, animations: { () -> Void in
-                self.stacks = objects as! [PFObject]?
+                self.stacks = objects
                 self.table_stacks.reloadData()
                 }, completion: { (Bool) -> Void in
                     //
@@ -129,7 +129,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print ("cancelled")
         }
         else{
-            var stackName = alertView.textFieldAtIndex(0)!.text
+            let stackName = alertView.textFieldAtIndex(0)!.text
             self.addStack(stackName!)
         }
     }
