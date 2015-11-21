@@ -31,6 +31,8 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
     var btn_toggle: UIButton!
     var btn_forgot: UIButton!
     var btn_visibility : UIButton!
+    var label_terms: UILabel!
+    var btn_terms: UIButton!
     
     
     var kbSizeVal : CGFloat! = 300
@@ -64,10 +66,20 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         label_punchline.center.x = view.center.x
         view.addSubview(label_punchline)
         
+        
+        btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 30, width: 80, height: 30))
+        btn_toggle.backgroundColor = UIColor.clearColor()
+        btn_toggle.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
+        btn_toggle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
+        btn_toggle.setTitle("Login", forState: .Normal)
+        btn_toggle.setTitle("Sign up", forState: .Selected)
+        btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
+        view.addSubview(btn_toggle)
+        
         // CARD
         
-        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 160))
-        card_origin_y = view.frame.height - 80
+        card = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 215))
+        card_origin_y = view.frame.height - 110
         card.center.y = card_origin_y
         card.backgroundColor = UIColor.whiteColor()
         card.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -110,18 +122,47 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         input_pw.secureTextEntry = true
         input_pw.autocapitalizationType = UITextAutocapitalizationType.None
         card.addSubview(input_pw)
+        
+        
+        // label_terms
+        
+        label_terms = UILabel(frame: CGRect(x: 60, y: 100, width: view.frame.width - 120, height: 50))
+        label_terms.text = "By signing up you agree to our"
+        label_terms.numberOfLines = 2
+        label_terms.textAlignment = .Center
+        label_terms.font = UIFont.primaryFontSmall()
+        label_terms.textColor = UIColor.primaryColor(0.5)
+        card.addSubview(label_terms)
 
+        
+        // btn_terms
+        
+        btn_terms = UIButton(frame: CGRect(x: 60, y: 115, width: view.frame.width - 120, height: 50))
+        btn_terms.setTitle("Terms of Service and Privacy Policy", forState: .Normal)
+        btn_terms.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        btn_terms.titleLabel?.textAlignment = NSTextAlignment.Center
+        btn_terms.titleLabel!.font = UIFont.primaryFontSmall()
+        btn_terms.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
+        btn_terms.addTarget(self, action: "didTapTerms:", forControlEvents: .TouchUpInside)
+        btn_terms.alpha = 1
+        card.addSubview(btn_terms)
+        
+        
+        btn_forgot = UIButton(frame: CGRect(x: 60, y: 100, width: view.frame.width - 120, height: 50))
+        btn_forgot.setTitle("Did you forget your password?", forState: .Normal)
+        btn_forgot.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        btn_forgot.titleLabel?.textAlignment = NSTextAlignment.Center
+        btn_forgot.titleLabel!.font = UIFont.primaryFontSmall()
+        btn_forgot.backgroundColor = UIColor.clearColor()
+        btn_forgot.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
+        btn_forgot.addTarget(self, action: "didTapForgot:", forControlEvents: .TouchUpInside)
+        btn_forgot.alpha = 0
+        card.addSubview(btn_forgot)
+        
         
         // BUTTONS
         
-        btn_toggle = UIButton(frame: CGRect(x: screenSize.width - 100, y: 30, width: 80, height: 30))
-        btn_toggle.backgroundColor = UIColor.clearColor()
-        btn_toggle.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
-        btn_toggle.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Right
-        btn_toggle.setTitle("Login", forState: .Normal)
-        btn_toggle.setTitle("Sign up", forState: .Selected)
-        btn_toggle.addTarget(self, action: "didToggle:", forControlEvents: .TouchUpInside)
-        view.addSubview(btn_toggle)
+ 
         
         btn_visibility = UIButton(frame: CGRect(x: screenSize.width - 55, y: 58, width: 52, height: 34))
         btn_visibility.backgroundColor = UIColor.clearColor()
@@ -144,14 +185,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         card.addSubview(btn_go)
         
         
-        btn_forgot = UIButton(frame: CGRect(x: 20, y: 30, width: 80, height: 30))
-        btn_forgot.backgroundColor = UIColor.clearColor()
-        btn_forgot.setTitleColor(UIColor.primaryAccent(1.0), forState: .Normal)
-        btn_forgot.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        btn_forgot.setTitle("Forgot?", forState: .Normal)
-        btn_forgot.addTarget(self, action: "didTapForgot:", forControlEvents: .TouchUpInside)
-        btn_forgot.alpha = 0
-        view.addSubview(btn_forgot)
+  
         
         
         
@@ -202,8 +236,8 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions(rawValue: UInt(animationCurve << 16)), animations: {
             
-            self.logotype.center.y = screenSize.height * 0.2
-            self.label_punchline.center.y = screenSize.height * 0.35
+            self.logotype.center.y = screenSize.height * 0.15
+            self.label_punchline.center.y = screenSize.height * 0.3
             self.label_punchline.alpha = 0
             
             self.card.backgroundColor = UIColor.whiteColor()
@@ -279,11 +313,15 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
             self.btn_toggle.selected = false
             self.btn_go.setTitle("Sign up", forState: .Normal)
             self.btn_forgot.alpha = 0
+            self.btn_terms.alpha = 1
+            self.label_terms.alpha = 1
             toggleAnimation()
         }else{
             self.btn_toggle.selected = true
             self.btn_go.setTitle("Log in", forState: .Normal)
             self.btn_forgot.alpha = 1
+            self.btn_terms.alpha = 0
+            self.label_terms.alpha = 0
             toggleAnimation()
         }
         
@@ -315,6 +353,14 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
         self.presentViewController(titlePrompt, animated: true, completion: nil)
         
     }
+    
+    func didTapTerms(sender:AnyObject){
+        
+        let openLink = NSURL(string : "http://thatedchao.com/terms.html")
+        UIApplication.sharedApplication().openURL(openLink!)
+
+    }
+
     
     
     func resetPassword(email : String){
