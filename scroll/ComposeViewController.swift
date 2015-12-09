@@ -260,17 +260,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                     }
                     
                 }else{
-                    print("no stackobject")
-                    note.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                        print("saved to regular stack")
-                        self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                            //
-                        })
-                    }
+                    print("there is no shortstack to save this to!")
+                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                        //
+                        print("saved to main Stack")
+                    })
                 }
 
             } else {
                 print(error!.description)
+                let alertView = UIAlertView(title: "Something's wrong", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+                self.enableBtn()
+
             }
 
         }

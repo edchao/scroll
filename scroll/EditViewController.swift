@@ -29,6 +29,8 @@ class EditViewController: UIViewController {
     var hIndent : CGFloat = 30.0
     var card_origin_y : CGFloat! = 300
     var noteText : String! = ""
+    var actInd : UIActivityIndicatorView!
+
     
     // DELEGATE VARS
     
@@ -64,6 +66,7 @@ class EditViewController: UIViewController {
         card.layer.shadowOpacity = 0.0
         card.layer.shadowRadius = 10.0
         view.addSubview(card)
+    
         
         // STROKE CARD
         
@@ -121,6 +124,14 @@ class EditViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
+        
+        // ACTIVITY INDICATOR
+        actInd = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: screenSize.width - 110, y: card.frame.height - 50, width: 40, height: 40)
+        actInd.hidesWhenStopped = true
+        actInd.color = UIColor.grayColor()
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        card.addSubview(actInd)
         
     }
     
@@ -191,6 +202,21 @@ class EditViewController: UIViewController {
     }
     
     
+    func disableBtn(){
+        self.textView_compose.alpha = 0.3
+        self.actInd.startAnimating()
+        self.btn_save.alpha = 0.3
+        self.btn_save.enabled = false
+    }
+    
+    func enableBtn(){
+        self.textView_compose.alpha = 1
+        self.actInd.stopAnimating()
+        self.btn_save.alpha = 1
+        self.btn_save.enabled = true
+    }
+    
+    
     // BUTTON ACTIONS
     
     func didTapCancel(sender:UIButton){
@@ -204,6 +230,8 @@ class EditViewController: UIViewController {
     }
     
     func didTapSave(sender:UIButton){
+        
+        self.disableBtn()
 
         let query = PFQuery(className:"Note")
         query.getObjectInBackgroundWithId(self.noteId) {
@@ -212,22 +240,42 @@ class EditViewController: UIViewController {
                 note!.ACL = PFACL(user: PFUser.currentUser()!)
                 note!["text"] = self.textView_compose.text
                 note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-                    print("saved issue")
-                    self.textView_compose.text = ""
-                    self.delegate?.editHomeTable(self)
-                    self.textView_compose.endEditing(true)
-                    self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                        //
-                    })
+                    if (success){
+                        print("saved issue")
+                        self.textView_compose.text = ""
+                        self.delegate?.editHomeTable(self)
+                        self.textView_compose.endEditing(true)
+                        self.enableBtn()
+                        self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                            //
+                        })
+                    }else{
+                        print("no shortstack to save this to")
+                        note!.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                            print("saved to Main stack")
+                            self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                                //
+                            })
+                        }
+                    }
+
                 }
 
             } else {
-                print(error)
+                print(error!.description)
+                let alertView = UIAlertView(title: "Something's wrong", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+                self.enableBtn()
+
             }
         }
 
         
     }
+    
+    
+    
+    
     
     
     

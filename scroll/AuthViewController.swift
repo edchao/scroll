@@ -283,7 +283,7 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
 
         }else{
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                self.card.center.y = self.card_origin_y + 160
+                self.card.center.y = self.card_origin_y + self.card.frame.height
                 }, completion: { (Bool) -> Void in
                     UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
                         self.card.center.y = self.card_origin_y
@@ -401,13 +401,15 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     self.input_pw.endEditing(true)
                     
                     UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                        self.card.center.y = self.card_origin_y + 110
+                        self.card.center.y = screenSize.height + self.card.frame.height / 2 - 50
                         }, completion: { (Bool) -> Void in
+                            self.input_email.text = ""
+                            self.input_pw.text = ""
                             self.presentModalHome(self)
                     })
                     
                 } else {
-                    let alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    let alertView = UIAlertView(title: "Oops", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
                     alertView.show()
                 }
             }
@@ -426,15 +428,17 @@ class AuthViewController: UIViewController, UIViewControllerTransitioningDelegat
                     self.input_pw.endEditing(true)
                     
                     UIView.animateWithDuration(0.5, delay: 0.6, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
-                        self.card.center.y = self.card_origin_y + 110
+                        self.card.center.y = screenSize.height + self.card.frame.height / 2 - 50
                         }, completion: { (Bool) -> Void in
+                            self.input_email.text = ""
+                            self.input_pw.text = ""
                             self.delay(0.2, closure: { () -> () in
                                 self.presentModalHome(self)
                             })
                     })
                     
                 }else{
-                    let alertView = UIAlertView(title: "Oops", message: error!.description, delegate: nil, cancelButtonTitle: "Ok")
+                    let alertView = UIAlertView(title: "Oops", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "Ok")
                     alertView.show()
                 }
             }

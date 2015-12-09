@@ -53,7 +53,7 @@ class StacksViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         // BUTTONS
         
-        btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
+        btn_add = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
         self.navigationController?.topViewController!.navigationItem.rightBarButtonItem = btn_add
         
         btn_logout = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapLogout:")

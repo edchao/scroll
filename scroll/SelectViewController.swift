@@ -71,7 +71,7 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
         btn_cancel = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapCancel:")
         self.navigationController?.topViewController!.navigationItem.leftBarButtonItem = btn_cancel
         
-        btn_add = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
+        btn_add = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: "didTapAdd:")
         self.navigationController?.topViewController!.navigationItem.rightBarButtonItem = btn_add
 
     }
